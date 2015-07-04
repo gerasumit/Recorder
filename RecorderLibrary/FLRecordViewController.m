@@ -16,7 +16,7 @@
 static void * RecordingContext = &RecordingContext;
 static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDeviceAuthorizedContext;
 
-@interface FLRecordViewController () <AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate> {
+@interface FLRecordViewController () <AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, FLCaptureSessionDelegate> {
     
     AVCaptureInput * flCaptureInput;
     AVCaptureOutput * flCaptureOutput;
@@ -50,6 +50,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     
     // Create the FLCaptureSession
     FLCaptureSession *session = [[FLCaptureSession alloc] init];
+    session.delegate = self;
     [self setFlCaptureSession:session];
     
     // Setup the preview view
@@ -235,14 +236,34 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
             
             // Add segments here
             // Start recording to a temporary file.
-            NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"movie" stringByAppendingPathExtension:@"mov"]];
+            NSUInteger segmentIndex = [self.flCaptureSession getCurrentSegmentIndex];
+            NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSString stringWithFormat:@"movieseg%lu", (unsigned long)segmentIndex ] stringByAppendingPathExtension:@"mov"]];
             [[self movieFileOutput] startRecordingToOutputFileURL:[NSURL fileURLWithPath:outputFilePath] recordingDelegate:self];
         }
         else
         {
             [[self movieFileOutput] stopRecording];
+            [self.flCaptureSession addSegmentWithURL:[self movieFileOutput].outputFileURL];
+            
+            AVCaptureMovieFileOutput *oldFileOutput = self.movieFileOutput;
+            AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
+            if ([self.flCaptureSession canAddOutput:movieFileOutput])
+            {
+                [self.flCaptureSession addOutput:movieFileOutput];
+                AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
+                
+                // Showing warning as the method is deprecated in 8.0
+                if ([connection isVideoStabilizationSupported])
+                    [connection setEnablesVideoStabilizationWhenAvailable:YES];
+                [self setMovieFileOutput:movieFileOutput];
+            }
+            NSLog(@"%@", oldFileOutput);
         }
     });
+}
+
+- (IBAction)completeRecording:(id)sender {
+    NSURL *mergedVideoURL = [self.flCaptureSession getCompleteVideoWithAudioAsset:nil];
 }
 
 - (IBAction)changeCamera:(id)sender
@@ -313,11 +334,10 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     UIBackgroundTaskIdentifier backgroundRecordingID = [self backgroundRecordingID];
     [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
     
+    
     [[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:outputFileURL completionBlock:^(NSURL *assetURL, NSError *error) {
         if (error)
             NSLog(@"%@", error);
-        
-        [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
         
         if (backgroundRecordingID != UIBackgroundTaskInvalid)
             [[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
@@ -420,6 +440,14 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
             });
         }
     }];
+}
+
+- (void) assetExportCompleted {
+    NSLog(@"Asset export completed");
+}
+
+- (void) assetExportFailedWithError:(NSError *)anError {
+    NSLog(@"Asset export failed with error :%@", anError);
 }
 
 @end

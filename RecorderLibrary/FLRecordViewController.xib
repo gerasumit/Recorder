@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
+        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
     </dependencies>
     <objects>
@@ -48,6 +49,36 @@
                                 <action selector="changeCamera:" destination="-1" eventType="touchUpInside" id="Fa7-9Z-lqz"/>
                             </connections>
                         </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="7gH-E7-Dia">
+                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <color key="backgroundColor" red="0.0" green="0.47843137250000001" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="6EH-ia-EVl">
+                                    <variation key="widthClass=compact" constant="30"/>
+                                </constraint>
+                                <constraint firstAttribute="height" constant="30" id="hWB-wf-hV3">
+                                    <variation key="widthClass=compact" constant="30"/>
+                                </constraint>
+                            </constraints>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="6EH-ia-EVl"/>
+                                    <exclude reference="hWB-wf-hV3"/>
+                                </mask>
+                            </variation>
+                            <variation key="widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="6EH-ia-EVl"/>
+                                    <include reference="hWB-wf-hV3"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="completeRecording:" destination="-1" eventType="touchUpInside" id="77W-Tl-WHD"/>
+                            </connections>
+                        </button>
                     </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     <constraints>
@@ -57,23 +88,35 @@
                         <constraint firstItem="wUp-Ns-47x" firstAttribute="top" secondItem="cii-MR-BM4" secondAttribute="top" constant="47" id="DZj-Q7-clH">
                             <variation key="widthClass=compact" constant="20"/>
                         </constraint>
+                        <constraint firstItem="7gH-E7-Dia" firstAttribute="top" secondItem="cii-MR-BM4" secondAttribute="top" constant="26" id="WHh-9o-kPV">
+                            <variation key="widthClass=compact" constant="20"/>
+                        </constraint>
+                        <constraint firstAttribute="trailing" secondItem="7gH-E7-Dia" secondAttribute="trailing" constant="57" id="w2D-2q-PZe">
+                            <variation key="widthClass=compact" constant="20"/>
+                        </constraint>
                     </constraints>
                     <variation key="default">
                         <mask key="subviews">
                             <exclude reference="wUp-Ns-47x"/>
+                            <exclude reference="7gH-E7-Dia"/>
                         </mask>
                         <mask key="constraints">
                             <exclude reference="4XU-Hn-i6a"/>
                             <exclude reference="DZj-Q7-clH"/>
+                            <exclude reference="WHh-9o-kPV"/>
+                            <exclude reference="w2D-2q-PZe"/>
                         </mask>
                     </variation>
                     <variation key="widthClass=compact">
                         <mask key="subviews">
                             <include reference="wUp-Ns-47x"/>
+                            <include reference="7gH-E7-Dia"/>
                         </mask>
                         <mask key="constraints">
                             <include reference="4XU-Hn-i6a"/>
                             <include reference="DZj-Q7-clH"/>
+                            <include reference="WHh-9o-kPV"/>
+                            <include reference="w2D-2q-PZe"/>
                         </mask>
                     </variation>
                 </view>
@@ -133,12 +176,12 @@
                     <exclude reference="AaE-6T-8P0"/>
                 </mask>
                 <mask key="constraints">
+                    <exclude reference="qSe-xq-WWD"/>
+                    <exclude reference="zbC-WN-V89"/>
                     <exclude reference="DdS-Bk-IPC"/>
                     <exclude reference="EJR-FH-b6t"/>
                     <exclude reference="NO5-HM-NPb"/>
                     <exclude reference="qR2-Bn-O1y"/>
-                    <exclude reference="qSe-xq-WWD"/>
-                    <exclude reference="zbC-WN-V89"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -147,12 +190,12 @@
                     <include reference="AaE-6T-8P0"/>
                 </mask>
                 <mask key="constraints">
+                    <include reference="qSe-xq-WWD"/>
+                    <include reference="zbC-WN-V89"/>
                     <include reference="DdS-Bk-IPC"/>
                     <include reference="EJR-FH-b6t"/>
                     <include reference="NO5-HM-NPb"/>
                     <include reference="qR2-Bn-O1y"/>
-                    <include reference="qSe-xq-WWD"/>
-                    <include reference="zbC-WN-V89"/>
                 </mask>
             </variation>
         </view>

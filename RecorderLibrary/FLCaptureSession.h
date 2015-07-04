@@ -16,8 +16,24 @@
 #define FLCaptureSessionRuntimeErrorNotification AVCaptureSessionRuntimeErrorNotification 
 
 
+@protocol FLCaptureSessionDelegate <NSObject>
+
+- (void) assetExportCompleted;
+- (void) assetExportFailedWithError: (NSError *) anError;
+
+@end
+
 @interface FLCaptureSession : AVCaptureSession {
     NSMutableArray * videoSegments;
 }
+
+@property (nonatomic, weak) id<FLCaptureSessionDelegate> delegate;
+
+- (NSUInteger) getCurrentSegmentIndex;
+
+- (void) addSegmentWithURL: (NSURL *) url;
+- (void) removeSegmentWithURL: (NSURL *) url;
+
+- (NSURL *) getCompleteVideoWithAudioAsset: (AVAsset *) audioAsset;
 
 @end
