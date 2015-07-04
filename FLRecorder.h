@@ -7,6 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "FLPreviewView.h"
 
 @protocol FLRecorderDelegate <NSObject>
 
@@ -23,6 +24,10 @@
 
 @interface FLRecorder : NSObject
 
+-(void)initializeWithPreviewView:(FLPreviewView*)previewView andDelegate:(id)delegate;
+
+- (void)startSession;
+-(void)stopSession;
 
 - (void)checkDeviceAuthorizationStatus;
 

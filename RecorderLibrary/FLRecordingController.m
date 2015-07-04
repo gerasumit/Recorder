@@ -7,8 +7,12 @@
 //
 
 #import "FLRecordingController.h"
+#import "FLRecorder.h"
 
 @interface FLRecordingController ()
+
+@property (nonatomic, strong) FLRecorder *recorderLib;
+
 
 @end
 
@@ -17,7 +21,18 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     [self setTitle:@"Ankur's VC"];
-    
+    self.recorderLib  = [[FLRecorder alloc] init];
+    [self.recorderLib initializeWithPreviewView:self.previewView andDelegate:nil];
+}
+
+-(void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:animated];
+    [self.recorderLib startSession];
+}
+
+-(void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    [self.recorderLib stopSession];
 }
 
 - (BOOL)prefersStatusBarHidden
