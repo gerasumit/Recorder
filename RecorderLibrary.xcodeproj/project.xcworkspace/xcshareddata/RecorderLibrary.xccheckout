@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>D0F3EBCA-8A7F-4FB5-8E3C-81E9B1706E21</string>
+	<key>IDESourceControlProjectName</key>
+	<string>project</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>ED9436CB3575C30101844E3F6C1E728EB9525C49</key>
+		<string>https://github.com/amadeusmozart/Recorder.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>RecorderLibrary.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>ED9436CB3575C30101844E3F6C1E728EB9525C49</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/amadeusmozart/Recorder.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>ED9436CB3575C30101844E3F6C1E728EB9525C49</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>ED9436CB3575C30101844E3F6C1E728EB9525C49</string>
+			<key>IDESourceControlWCCName</key>
+			<string>RecorderLibrary</string>
+		</dict>
+	</array>
+</dict>
+</plist>
