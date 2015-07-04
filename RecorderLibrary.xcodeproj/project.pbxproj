@@ -18,6 +18,8 @@
 		10758D971B4785F800196986 /* FLPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D961B4785F800196986 /* FLPreviewView.m */; };
 		10758D9D1B47AECA00196986 /* FLCaptureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D9C1B47AECA00196986 /* FLCaptureSession.m */; };
 		4751DE471B47B833000DC867 /* FLRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4751DE461B47B833000DC867 /* FLRecorder.m */; };
+		4751DE4B1B47CF15000DC867 /* FLRecordingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4751DE491B47CF15000DC867 /* FLRecordingController.m */; };
+		4751DE4C1B47CF15000DC867 /* FLRecordingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4751DE4A1B47CF15000DC867 /* FLRecordingController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		10758D9C1B47AECA00196986 /* FLCaptureSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLCaptureSession.m; path = RecorderLibrary/FLCaptureSession.m; sourceTree = "<group>"; };
 		4751DE451B47B833000DC867 /* FLRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLRecorder.h; sourceTree = "<group>"; };
 		4751DE461B47B833000DC867 /* FLRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLRecorder.m; sourceTree = "<group>"; };
+		4751DE481B47CF15000DC867 /* FLRecordingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLRecordingController.h; path = RecorderLibrary/FLRecordingController.h; sourceTree = "<group>"; };
+		4751DE491B47CF15000DC867 /* FLRecordingController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLRecordingController.m; path = RecorderLibrary/FLRecordingController.m; sourceTree = "<group>"; };
+		4751DE4A1B47CF15000DC867 /* FLRecordingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FLRecordingController.xib; path = RecorderLibrary/FLRecordingController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -74,6 +79,7 @@
 		10758D5D1B46DB9A00196986 = {
 			isa = PBXGroup;
 			children = (
+				4751DE4D1B47CF32000DC867 /* FLRecordingController */,
 				4751DE411B47B793000DC867 /* FLRecorder */,
 				10758D681B46DB9A00196986 /* RecorderLibrary */,
 				10758D821B46DB9A00196986 /* RecorderLibraryTests */,
@@ -169,6 +175,16 @@
 			name = FLRecorder;
 			sourceTree = "<group>";
 		};
+		4751DE4D1B47CF32000DC867 /* FLRecordingController */ = {
+			isa = PBXGroup;
+			children = (
+				4751DE481B47CF15000DC867 /* FLRecordingController.h */,
+				4751DE491B47CF15000DC867 /* FLRecordingController.m */,
+				4751DE4A1B47CF15000DC867 /* FLRecordingController.xib */,
+			);
+			name = FLRecordingController;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -251,6 +267,7 @@
 			files = (
 				10758D941B477CE000196986 /* FLRecordViewController.xib in Resources */,
 				10758D751B46DB9A00196986 /* Main.storyboard in Resources */,
+				4751DE4C1B47CF15000DC867 /* FLRecordingController.xib in Resources */,
 				10758D7A1B46DB9A00196986 /* LaunchScreen.xib in Resources */,
 				10758D771B46DB9A00196986 /* Images.xcassets in Resources */,
 			);
@@ -270,6 +287,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				4751DE4B1B47CF15000DC867 /* FLRecordingController.m in Sources */,
 				10758D721B46DB9A00196986 /* FLRecordViewController.m in Sources */,
 				10758D971B4785F800196986 /* FLPreviewView.m in Sources */,
 				10758D6F1B46DB9A00196986 /* AppDelegate.m in Sources */,

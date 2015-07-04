@@ -11,6 +11,7 @@
 #import "FLPreviewView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "FLCaptureSession.h"
+#import "FLRecordingController.h"
 
 
 static void * RecordingContext = &RecordingContext;
@@ -47,6 +48,8 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    [self setTitle:@"Sumit's VC"];
     
     // Create the FLCaptureSession
     FLCaptureSession *session = [[FLCaptureSession alloc] init];
@@ -420,6 +423,12 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
             });
         }
     }];
+}
+
+-(IBAction)switchToNext:(id)sender{
+    FLRecordingController *ctrl = [[FLRecordingController alloc] initWithNibName:@"FLRecordingController" bundle:nil];
+    
+    [self.navigationController pushViewController:ctrl animated:YES];
 }
 
 @end
