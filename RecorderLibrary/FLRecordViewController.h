@@ -10,5 +10,7 @@
 
 @interface FLRecordViewController : UIViewController
 
+-(IBAction)switchToNext:(id)sender;
+
 @end
 

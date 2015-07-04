@@ -19,7 +19,8 @@
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
     FLRecordViewController *controller = [[FLRecordViewController alloc] init];
-    [self.window setRootViewController:controller];
+    
+    [(UINavigationController*)(self.window.rootViewController) pushViewController:controller animated:NO];
     return YES;
 }
 

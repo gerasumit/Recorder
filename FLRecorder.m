@@ -1,23 +1,22 @@
 //
-//  FLRecordViewController.m
+//  FLRecorder.m
 //  RecorderLibrary
 //
-//  Created by Sumit Gera on 03/07/15.
+//  Created by Ankur Kesharwani on 7/4/15.
 //  Copyright (c) 2015 SumitGera. All rights reserved.
 //
 
-#import "FLRecordViewController.h"
+#import "FLRecorder.h"
 #import <AssetsLibrary/AssetsLibrary.h>
 #import "FLPreviewView.h"
 #import <AVFoundation/AVFoundation.h>
 #import "FLCaptureSession.h"
-#import "FLRecordingController.h"
 
 
 static void * RecordingContext = &RecordingContext;
 static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDeviceAuthorizedContext;
 
-@interface FLRecordViewController () <AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate, FLCaptureSessionDelegate> {
+@interface FLRecorder () <AVCaptureFileOutputRecordingDelegate, AVCaptureVideoDataOutputSampleBufferDelegate> {
     
     AVCaptureInput * flCaptureInput;
     AVCaptureOutput * flCaptureOutput;
@@ -26,12 +25,14 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     NSMutableArray * segments;
 }
 
-@property (nonatomic, weak) IBOutlet FLPreviewView * previewView;
-@property (nonatomic, weak) IBOutlet UIButton * recordButton;
-@property (nonatomic, weak) IBOutlet UIButton *cameraButton;
+@property (nonatomic, weak) id<FLRecorderDelegate> delegate;
+
+@property (nonatomic, weak) FLPreviewView * previewView;
 
 // Session management.
 @property (nonatomic) dispatch_queue_t sessionQueue; // Communicate with the session and other session objects on this queue.
+@property (nonatomic) dispatch_queue_t callbackQueue; // All Calback will be sent on this queue;
+
 @property (nonatomic) AVCaptureDeviceInput *videoDeviceInput;
 @property (nonatomic) AVCaptureMovieFileOutput *movieFileOutput;
 @property (nonatomic) FLCaptureSession * flCaptureSession;
@@ -44,19 +45,16 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 
 @end
 
-@implementation FLRecordViewController
+@implementation FLRecorder
 
-- (void)viewDidLoad {
-    [super viewDidLoad];
-    
-    [self setTitle:@"Sumit's VC"];
+-(void)initializeWithPreviewView:(FLPreviewView*)previewView andDelegate:(id)delegate {
     
     // Create the FLCaptureSession
     FLCaptureSession *session = [[FLCaptureSession alloc] init];
-    session.delegate = self;
     [self setFlCaptureSession:session];
     
     // Setup the preview view
+    [self setPreviewView:previewView];
     [[self previewView] setSession:session];
     
     // Check for device authorization
@@ -65,7 +63,6 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     // In general it is not safe to mutate an FLCaptureSession or any of its inputs, outputs, or connections from multiple threads at the same time.
     // Why not do all of this on the main queue?
     // -[FLCaptureSession startRunning] is a blocking call which can take a long time. We dispatch session setup to the sessionQueue so that the main queue isn't blocked (which keeps the UI responsive).
-    
     dispatch_queue_t sessionQueue = dispatch_queue_create("session queue", DISPATCH_QUEUE_SERIAL);
     [self setSessionQueue:sessionQueue];
     
@@ -74,16 +71,14 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         
         NSError *error = nil;
         
-        AVCaptureDevice *videoDevice = [FLRecordViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionFront];
+        AVCaptureDevice *videoDevice = [self deviceWithMediaType:AVMediaTypeVideo preferringPosition:AVCaptureDevicePositionFront];
         AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:&error];
         
-        if (error)
-        {
+        if (error){
             NSLog(@"%@", error);
         }
         
-        if ([session canAddInput:videoDeviceInput])
-        {
+        if ([session canAddInput:videoDeviceInput]){
             [session addInput:videoDeviceInput];
             [self setVideoDeviceInput:videoDeviceInput];
             
@@ -99,19 +94,16 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         AVCaptureDevice *audioDevice = [[AVCaptureDevice devicesWithMediaType:AVMediaTypeAudio] firstObject];
         AVCaptureDeviceInput *audioDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:audioDevice error:&error];
         
-        if (error)
-        {
+        if (error){
             NSLog(@"%@", error);
         }
         
-        if ([session canAddInput:audioDeviceInput])
-        {
+        if ([session canAddInput:audioDeviceInput]){
             [session addInput:audioDeviceInput];
         }
         
         AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
-        if ([session canAddOutput:movieFileOutput])
-        {
+        if ([session canAddOutput:movieFileOutput]){
             [session addOutput:movieFileOutput];
             AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
             
@@ -121,39 +113,27 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
             [self setMovieFileOutput:movieFileOutput];
         }
     });
-    
 }
 
--(instancetype) initWithNibName:(NSString *)nibNameOrNil bundle:(NSBundle *)nibBundleOrNil {
-    self = [super initWithNibName:nibNameOrNil
-                            bundle:nibBundleOrNil];
-    if (self) {
-        
-    }
-    return self;
-}
-
-- (void)viewWillAppear:(BOOL)animated
+- (void)startSession
 {
     dispatch_async([self sessionQueue], ^{
         [self addObserver:self forKeyPath:@"sessionRunningAndDeviceAuthorized" options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:SessionRunningAndDeviceAuthorizedContext];
         [self addObserver:self forKeyPath:@"movieFileOutput.recording" options:(NSKeyValueObservingOptionOld | NSKeyValueObservingOptionNew) context:RecordingContext];
-//        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:[[self videoDeviceInput] device]];
-        
-        __weak FLRecordViewController *weakSelf = self;
+
+        __weak FLRecorder *weakSelf = self;
         [self setRuntimeErrorHandlingObserver:[[NSNotificationCenter defaultCenter] addObserverForName:FLCaptureSessionRuntimeErrorNotification object:[self flCaptureSession] queue:nil usingBlock:^(NSNotification *note) {
-            FLRecordViewController *strongSelf = weakSelf;
+            FLRecorder *strongSelf = weakSelf;
             dispatch_async([strongSelf sessionQueue], ^{
                 // Manually restarting the session since it must have been stopped due to an error.
                 [[strongSelf flCaptureSession] startRunning];
-                [[strongSelf recordButton] setTitle:NSLocalizedString(@"Record", @"Recording button record title") forState:UIControlStateNormal];
             });
         }]];
         [[self flCaptureSession] startRunning];
     });
 }
 
-- (void)viewDidDisappear:(BOOL)animated
+- (void)stopSession
 {
     dispatch_async([self sessionQueue], ^{
         [[self flCaptureSession] stopRunning];
@@ -166,11 +146,6 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     });
 }
 
-- (BOOL)prefersStatusBarHidden
-{
-    return YES;
-}
-
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context
 {
     if (context == RecordingContext)
@@ -178,17 +153,8 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         BOOL isRecording = [change[NSKeyValueChangeNewKey] boolValue];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (isRecording)
-            {
-                [[self cameraButton] setEnabled:NO];
-                [[self recordButton] setTitle:NSLocalizedString(@"Stop", @"Recording button stop title") forState:UIControlStateNormal];
-                [[self recordButton] setEnabled:YES];
-            }
-            else
-            {
-                [[self cameraButton] setEnabled:YES];
-                [[self recordButton] setTitle:NSLocalizedString(@"Record", @"Recording button record title") forState:UIControlStateNormal];
-                [[self recordButton] setEnabled:YES];
+            if([self.delegate respondsToSelector:@selector(recordingContextChanged:)]){
+                [self.delegate recordingContextChanged:isRecording];
             }
         });
     }
@@ -197,15 +163,8 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         BOOL isRunning = [change[NSKeyValueChangeNewKey] boolValue];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            if (isRunning)
-            {
-                [[self cameraButton] setEnabled:YES];
-                [[self recordButton] setEnabled:YES];
-            }
-            else
-            {
-                [[self cameraButton] setEnabled:NO];
-                [[self recordButton] setEnabled:NO];
+            if([self.delegate respondsToSelector:@selector(sessionRunningAndDeviceAuthorizedContextChanged:)]){
+                [self.delegate sessionRunningAndDeviceAuthorizedContextChanged:isRunning];
             }
         });
     }
@@ -215,10 +174,8 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     }
 }
 
-- (IBAction)toggleMovieRecording:(id)sender
+- (void)toggleMovieRecording
 {
-    [[self recordButton] setEnabled:NO];
-    
     dispatch_async([self sessionQueue], ^{
         if (![[self movieFileOutput] isRecording])
         {
@@ -234,45 +191,23 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
             [[[self movieFileOutput] connectionWithMediaType:AVMediaTypeVideo] setVideoOrientation:[[(AVCaptureVideoPreviewLayer *)[[self previewView] layer] connection] videoOrientation]];
             
             // Turning OFF flash for video recording
-            [FLRecordViewController setFlashMode:AVCaptureFlashModeOff forDevice:[[self videoDeviceInput] device]];
+            [self setFlashMode:AVCaptureFlashModeOff forDevice:[[self videoDeviceInput] device]];
             
             
             // Add segments here
             // Start recording to a temporary file.
-            NSUInteger segmentIndex = [self.flCaptureSession getCurrentSegmentIndex];
-            NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSString stringWithFormat:@"movieseg%lu", (unsigned long)segmentIndex ] stringByAppendingPathExtension:@"mov"]];
+            NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[@"movie" stringByAppendingPathExtension:@"mov"]];
             [[self movieFileOutput] startRecordingToOutputFileURL:[NSURL fileURLWithPath:outputFilePath] recordingDelegate:self];
         }
         else
         {
             [[self movieFileOutput] stopRecording];
-            [self.flCaptureSession addSegmentWithURL:[self movieFileOutput].outputFileURL];
-            
-            AVCaptureMovieFileOutput *oldFileOutput = self.movieFileOutput;
-            AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
-            if ([self.flCaptureSession canAddOutput:movieFileOutput])
-            {
-                [self.flCaptureSession addOutput:movieFileOutput];
-                AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-                
-                // Showing warning as the method is deprecated in 8.0
-                if ([connection isVideoStabilizationSupported])
-                    [connection setEnablesVideoStabilizationWhenAvailable:YES];
-                [self setMovieFileOutput:movieFileOutput];
-            }
-            NSLog(@"%@", oldFileOutput);
         }
     });
 }
 
-- (IBAction)completeRecording:(id)sender {
-    NSURL *mergedVideoURL = [self.flCaptureSession getCompleteVideoWithAudioAsset:nil];
-}
-
-- (IBAction)changeCamera:(id)sender
+-(void)switchCamera
 {
-    [[self cameraButton] setEnabled:NO];
-    [[self recordButton] setEnabled:NO];
     
     dispatch_async([self sessionQueue], ^{
         AVCaptureDevice *currentVideoDevice = [[self videoDeviceInput] device];
@@ -292,7 +227,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
                 break;
         }
         
-        AVCaptureDevice *videoDevice = [FLRecordViewController deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
+        AVCaptureDevice *videoDevice = [self deviceWithMediaType:AVMediaTypeVideo preferringPosition:preferredPosition];
         AVCaptureDeviceInput *videoDeviceInput = [AVCaptureDeviceInput deviceInputWithDevice:videoDevice error:nil];
         
         [[self flCaptureSession] beginConfiguration];
@@ -302,8 +237,8 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         {
             [[NSNotificationCenter defaultCenter] removeObserver:self name:AVCaptureDeviceSubjectAreaDidChangeNotification object:currentVideoDevice];
             
-            [FLRecordViewController setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
-//            [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(subjectAreaDidChange:) name:AVCaptureDeviceSubjectAreaDidChangeNotification object:videoDevice];
+            [self setFlashMode:AVCaptureFlashModeAuto forDevice:videoDevice];
+
             
             [[self flCaptureSession] addInput:videoDeviceInput];
             [self setVideoDeviceInput:videoDeviceInput];
@@ -316,8 +251,9 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
         [[self flCaptureSession] commitConfiguration];
         
         dispatch_async(dispatch_get_main_queue(), ^{
-            [[self cameraButton] setEnabled:YES];
-            [[self recordButton] setEnabled:YES];
+            if([self.delegate respondsToSelector:@selector(cameraSwitched)]){
+                [self.delegate cameraSwitched];
+            }
         });
     });
 }
@@ -337,19 +273,15 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     UIBackgroundTaskIdentifier backgroundRecordingID = [self backgroundRecordingID];
     [self setBackgroundRecordingID:UIBackgroundTaskInvalid];
     
-    
     [[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:outputFileURL completionBlock:^(NSURL *assetURL, NSError *error) {
         if (error)
             NSLog(@"%@", error);
         
+        [[NSFileManager defaultManager] removeItemAtURL:outputFileURL error:nil];
+        
         if (backgroundRecordingID != UIBackgroundTaskInvalid)
             [[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
     }];
-}
-
-- (void)didReceiveMemoryWarning {
-    [super didReceiveMemoryWarning];
-    // Dispose of any resources that can be recreated.
 }
 
 - (void) setOptimumSessionPreset: (FLCaptureSession *) aCaptureSession {
@@ -373,7 +305,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     }
 }
 
-+ (void)setFlashMode:(AVCaptureFlashMode)flashMode forDevice:(AVCaptureDevice *)device
+- (void)setFlashMode:(AVCaptureFlashMode)flashMode forDevice:(AVCaptureDevice *)device
 {
     if ([device hasFlash] && [device isFlashModeSupported:flashMode])
     {
@@ -403,15 +335,38 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     }
 }
 
-+ (AVCaptureDevice *)deviceWithMediaType:(NSString *)mediaType preferringPosition:(AVCaptureDevicePosition)position
-{
+
+
+
+- (void)checkDeviceAuthorizationStatus {
+    NSString *mediaType = AVMediaTypeVideo;
+    
+    [AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
+        if (granted) {
+            //Granted access to mediaType
+            [self setDeviceAuthorized:YES];
+        }
+        else{
+            [self setDeviceAuthorized:NO];
+            
+            //Not granted access to mediaType
+            dispatch_async(dispatch_get_main_queue(), ^{
+
+                // Notify the delegate that the device is not autorized to use the camera.
+                if([self.delegate respondsToSelector:@selector(deviceNotAuthorized)]){
+                    [self.delegate deviceNotAuthorized];
+                }
+            });
+        }
+    }];
+}
+
+- (AVCaptureDevice *)deviceWithMediaType:(NSString *)mediaType preferringPosition:(AVCaptureDevicePosition)position {
     NSArray *devices = [AVCaptureDevice devicesWithMediaType:mediaType];
     AVCaptureDevice *captureDevice = [devices firstObject];
     
-    for (AVCaptureDevice *device in devices)
-    {
-        if ([device position] == position)
-        {
+    for (AVCaptureDevice *device in devices){
+        if ([device position] == position){
             captureDevice = device;
             break;
         }
@@ -420,43 +375,5 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
     return captureDevice;
 }
 
-- (void)checkDeviceAuthorizationStatus
-{
-    NSString *mediaType = AVMediaTypeVideo;
-    
-    [AVCaptureDevice requestAccessForMediaType:mediaType completionHandler:^(BOOL granted) {
-        if (granted)
-        {
-            //Granted access to mediaType
-            [self setDeviceAuthorized:YES];
-        }
-        else
-        {
-            //Not granted access to mediaType
-            dispatch_async(dispatch_get_main_queue(), ^{
-                [[[UIAlertView alloc] initWithTitle:@"AVCam!"
-                                            message:@"AVCam doesn't have permission to use Camera, please change privacy settings"
-                                           delegate:self
-                                  cancelButtonTitle:@"OK"
-                                  otherButtonTitles:nil] show];
-                [self setDeviceAuthorized:NO];
-            });
-        }
-    }];
-}
-
-- (void) assetExportCompleted {
-    NSLog(@"Asset export completed");
-}
-
-- (void) assetExportFailedWithError:(NSError *)anError {
-    NSLog(@"Asset export failed with error :%@", anError);
-
-}
--(IBAction)switchToNext:(id)sender{
-    FLRecordingController *ctrl = [[FLRecordingController alloc] initWithNibName:@"FLRecordingController" bundle:nil];
-    
-    [self.navigationController pushViewController:ctrl animated:YES];
-}
 
 @end
