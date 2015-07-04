@@ -9,11 +9,14 @@
 /* Begin PBXBuildFile section */
 		10758D6C1B46DB9A00196986 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D6B1B46DB9A00196986 /* main.m */; };
 		10758D6F1B46DB9A00196986 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D6E1B46DB9A00196986 /* AppDelegate.m */; };
-		10758D721B46DB9A00196986 /* ViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D711B46DB9A00196986 /* ViewController.m */; };
+		10758D721B46DB9A00196986 /* FLRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D711B46DB9A00196986 /* FLRecordViewController.m */; };
 		10758D751B46DB9A00196986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10758D731B46DB9A00196986 /* Main.storyboard */; };
 		10758D771B46DB9A00196986 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10758D761B46DB9A00196986 /* Images.xcassets */; };
 		10758D7A1B46DB9A00196986 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10758D781B46DB9A00196986 /* LaunchScreen.xib */; };
 		10758D861B46DB9A00196986 /* RecorderLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D851B46DB9A00196986 /* RecorderLibraryTests.m */; };
+		10758D941B477CE000196986 /* FLRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10758D931B477CE000196986 /* FLRecordViewController.xib */; };
+		10758D971B4785F800196986 /* FLPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D961B4785F800196986 /* FLPreviewView.m */; };
+		10758D9D1B47AECA00196986 /* FLCaptureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D9C1B47AECA00196986 /* FLCaptureSession.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -32,14 +35,19 @@
 		10758D6B1B46DB9A00196986 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		10758D6D1B46DB9A00196986 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		10758D6E1B46DB9A00196986 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		10758D701B46DB9A00196986 /* ViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = ViewController.h; sourceTree = "<group>"; };
-		10758D711B46DB9A00196986 /* ViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = ViewController.m; sourceTree = "<group>"; };
+		10758D701B46DB9A00196986 /* FLRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLRecordViewController.h; sourceTree = "<group>"; };
+		10758D711B46DB9A00196986 /* FLRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLRecordViewController.m; sourceTree = "<group>"; };
 		10758D741B46DB9A00196986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		10758D761B46DB9A00196986 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		10758D791B46DB9A00196986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		10758D7F1B46DB9A00196986 /* RecorderLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecorderLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10758D841B46DB9A00196986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10758D851B46DB9A00196986 /* RecorderLibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecorderLibraryTests.m; sourceTree = "<group>"; };
+		10758D931B477CE000196986 /* FLRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLRecordViewController.xib; sourceTree = "<group>"; };
+		10758D951B4785F800196986 /* FLPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLPreviewView.h; sourceTree = "<group>"; };
+		10758D961B4785F800196986 /* FLPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLPreviewView.m; sourceTree = "<group>"; };
+		10758D9B1B47AECA00196986 /* FLCaptureSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLCaptureSession.h; sourceTree = "<group>"; };
+		10758D9C1B47AECA00196986 /* FLCaptureSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCaptureSession.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -83,8 +91,13 @@
 			children = (
 				10758D6D1B46DB9A00196986 /* AppDelegate.h */,
 				10758D6E1B46DB9A00196986 /* AppDelegate.m */,
-				10758D701B46DB9A00196986 /* ViewController.h */,
-				10758D711B46DB9A00196986 /* ViewController.m */,
+				10758D701B46DB9A00196986 /* FLRecordViewController.h */,
+				10758D711B46DB9A00196986 /* FLRecordViewController.m */,
+				10758D931B477CE000196986 /* FLRecordViewController.xib */,
+				10758D951B4785F800196986 /* FLPreviewView.h */,
+				10758D961B4785F800196986 /* FLPreviewView.m */,
+				10758D9B1B47AECA00196986 /* FLCaptureSession.h */,
+				10758D9C1B47AECA00196986 /* FLCaptureSession.m */,
 				10758D731B46DB9A00196986 /* Main.storyboard */,
 				10758D761B46DB9A00196986 /* Images.xcassets */,
 				10758D781B46DB9A00196986 /* LaunchScreen.xib */,
@@ -199,6 +212,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				10758D941B477CE000196986 /* FLRecordViewController.xib in Resources */,
 				10758D751B46DB9A00196986 /* Main.storyboard in Resources */,
 				10758D7A1B46DB9A00196986 /* LaunchScreen.xib in Resources */,
 				10758D771B46DB9A00196986 /* Images.xcassets in Resources */,
@@ -219,9 +233,11 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10758D721B46DB9A00196986 /* ViewController.m in Sources */,
+				10758D721B46DB9A00196986 /* FLRecordViewController.m in Sources */,
+				10758D971B4785F800196986 /* FLPreviewView.m in Sources */,
 				10758D6F1B46DB9A00196986 /* AppDelegate.m in Sources */,
 				10758D6C1B46DB9A00196986 /* main.m in Sources */,
+				10758D9D1B47AECA00196986 /* FLCaptureSession.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -348,6 +364,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RecorderLibrary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};
@@ -358,6 +375,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = RecorderLibrary/Info.plist;
+				IPHONEOS_DEPLOYMENT_TARGET = 7.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 			};

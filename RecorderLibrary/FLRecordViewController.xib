@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7702" systemVersion="14C1514" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7701"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLRecordViewController">
+            <connections>
+                <outlet property="cameraButton" destination="wUp-Ns-47x" id="ZAG-tm-PZ1"/>
+                <outlet property="previewView" destination="cii-MR-BM4" id="qey-h7-Y7g"/>
+                <outlet property="recordButton" destination="AaE-6T-8P0" id="IGT-3N-PjB"/>
+                <outlet property="view" destination="iN0-l3-epB" id="zSQ-jO-PeJ"/>
+            </connections>
+        </placeholder>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <view contentMode="scaleToFill" id="iN0-l3-epB">
+            <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+            <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="cii-MR-BM4" customClass="FLPreviewView">
+                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="wUp-Ns-47x">
+                            <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                            <color key="backgroundColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="46" id="MTv-4F-tNp">
+                                    <variation key="widthClass=compact" constant="30"/>
+                                </constraint>
+                                <constraint firstAttribute="height" constant="30" id="aVU-14-4xi"/>
+                            </constraints>
+                            <state key="normal">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <variation key="default">
+                                <mask key="constraints">
+                                    <exclude reference="MTv-4F-tNp"/>
+                                    <exclude reference="aVU-14-4xi"/>
+                                </mask>
+                            </variation>
+                            <variation key="widthClass=compact">
+                                <mask key="constraints">
+                                    <include reference="MTv-4F-tNp"/>
+                                    <include reference="aVU-14-4xi"/>
+                                </mask>
+                            </variation>
+                            <connections>
+                                <action selector="changeCamera:" destination="-1" eventType="touchUpInside" id="Fa7-9Z-lqz"/>
+                            </connections>
+                        </button>
+                    </subviews>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstItem="wUp-Ns-47x" firstAttribute="leading" secondItem="cii-MR-BM4" secondAttribute="leading" constant="127" id="4XU-Hn-i6a">
+                            <variation key="widthClass=compact" constant="20"/>
+                        </constraint>
+                        <constraint firstItem="wUp-Ns-47x" firstAttribute="top" secondItem="cii-MR-BM4" secondAttribute="top" constant="47" id="DZj-Q7-clH">
+                            <variation key="widthClass=compact" constant="20"/>
+                        </constraint>
+                    </constraints>
+                    <variation key="default">
+                        <mask key="subviews">
+                            <exclude reference="wUp-Ns-47x"/>
+                        </mask>
+                        <mask key="constraints">
+                            <exclude reference="4XU-Hn-i6a"/>
+                            <exclude reference="DZj-Q7-clH"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="subviews">
+                            <include reference="wUp-Ns-47x"/>
+                        </mask>
+                        <mask key="constraints">
+                            <include reference="4XU-Hn-i6a"/>
+                            <include reference="DZj-Q7-clH"/>
+                        </mask>
+                    </variation>
+                </view>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="AaE-6T-8P0">
+                    <rect key="frame" x="-23" y="-15" width="46" height="30"/>
+                    <color key="backgroundColor" red="0.91764705879999997" green="0.3803921569" blue="0.33333333329999998" alpha="1" colorSpace="calibratedRGB"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="46" id="CWO-Vf-nnP">
+                            <variation key="widthClass=compact" constant="30"/>
+                        </constraint>
+                        <constraint firstAttribute="height" constant="30" id="jOP-ZH-NjN"/>
+                    </constraints>
+                    <state key="normal">
+                        <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                    </state>
+                    <variation key="default">
+                        <mask key="constraints">
+                            <exclude reference="CWO-Vf-nnP"/>
+                            <exclude reference="jOP-ZH-NjN"/>
+                        </mask>
+                    </variation>
+                    <variation key="widthClass=compact">
+                        <mask key="constraints">
+                            <include reference="CWO-Vf-nnP"/>
+                            <include reference="jOP-ZH-NjN"/>
+                        </mask>
+                    </variation>
+                    <connections>
+                        <action selector="toggleMovieRecording:" destination="-1" eventType="touchUpInside" id="oE3-GG-BPf"/>
+                    </connections>
+                </button>
+            </subviews>
+            <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="cii-MR-BM4" secondAttribute="bottom" constant="150" id="DdS-Bk-IPC">
+                    <variation key="widthClass=compact" constant="0.0"/>
+                </constraint>
+                <constraint firstItem="cii-MR-BM4" firstAttribute="top" secondItem="iN0-l3-epB" secondAttribute="top" constant="150" id="EJR-FH-b6t">
+                    <variation key="widthClass=compact" constant="0.0"/>
+                </constraint>
+                <constraint firstAttribute="trailing" secondItem="cii-MR-BM4" secondAttribute="trailing" constant="100" id="NO5-HM-NPb">
+                    <variation key="widthClass=compact" constant="0.0"/>
+                </constraint>
+                <constraint firstItem="cii-MR-BM4" firstAttribute="leading" secondItem="iN0-l3-epB" secondAttribute="leading" constant="100" id="qR2-Bn-O1y">
+                    <variation key="widthClass=compact" constant="0.0"/>
+                </constraint>
+                <constraint firstAttribute="bottom" secondItem="AaE-6T-8P0" secondAttribute="bottom" constant="81" id="qSe-xq-WWD">
+                    <variation key="widthClass=compact" constant="20"/>
+                </constraint>
+                <constraint firstAttribute="centerX" secondItem="AaE-6T-8P0" secondAttribute="centerX" constant="-35" id="zbC-WN-V89">
+                    <variation key="widthClass=compact" constant="0.0"/>
+                </constraint>
+            </constraints>
+            <variation key="default">
+                <mask key="subviews">
+                    <exclude reference="cii-MR-BM4"/>
+                    <exclude reference="AaE-6T-8P0"/>
+                </mask>
+                <mask key="constraints">
+                    <exclude reference="DdS-Bk-IPC"/>
+                    <exclude reference="EJR-FH-b6t"/>
+                    <exclude reference="NO5-HM-NPb"/>
+                    <exclude reference="qR2-Bn-O1y"/>
+                    <exclude reference="qSe-xq-WWD"/>
+                    <exclude reference="zbC-WN-V89"/>
+                </mask>
+            </variation>
+            <variation key="widthClass=compact">
+                <mask key="subviews">
+                    <include reference="cii-MR-BM4"/>
+                    <include reference="AaE-6T-8P0"/>
+                </mask>
+                <mask key="constraints">
+                    <include reference="DdS-Bk-IPC"/>
+                    <include reference="EJR-FH-b6t"/>
+                    <include reference="NO5-HM-NPb"/>
+                    <include reference="qR2-Bn-O1y"/>
+                    <include reference="qSe-xq-WWD"/>
+                    <include reference="zbC-WN-V89"/>
+                </mask>
+            </variation>
+        </view>
+    </objects>
+</document>
