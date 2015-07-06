@@ -8,6 +8,7 @@
 
 #import "AppDelegate.h"
 #import "FLRecordViewController.h"
+#import "FLRecordingController.h"
 
 @interface AppDelegate ()
 
@@ -18,9 +19,9 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
-    FLRecordViewController *controller = [[FLRecordViewController alloc] init];
+    FLRecordingController *ctrl = [[FLRecordingController alloc] initWithNibName:@"FLRecordingController" bundle:nil];
     
-    [(UINavigationController*)(self.window.rootViewController) pushViewController:controller animated:NO];
+    self.window.rootViewController = ctrl;
     return YES;
 }
 

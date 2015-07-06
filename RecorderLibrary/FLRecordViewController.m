@@ -266,7 +266,7 @@ static void * SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevic
 }
 
 - (IBAction)completeRecording:(id)sender {
-    NSURL *mergedVideoURL = [self.flCaptureSession getCompleteVideoWithAudioAsset:nil];
+    [self.flCaptureSession getCompleteVideoWithAudioAsset:nil];
 }
 
 - (IBAction)changeCamera:(id)sender

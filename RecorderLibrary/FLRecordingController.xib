@@ -2,12 +2,14 @@
 <document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="7706" systemVersion="14D136" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7706"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="7703"/>
     </dependencies>
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLRecordingController">
             <connections>
+                <outlet property="playButton" destination="raa-Co-I1o" id="82B-rB-s7F"/>
                 <outlet property="previewView" destination="8oh-YT-6jn" id="s8k-oI-e6c"/>
+                <outlet property="saveButton" destination="ttZ-E1-0Bo" id="9iX-HZ-0l3"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -18,7 +20,41 @@
             <subviews>
                 <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8oh-YT-6jn" customClass="FLPreviewView">
                     <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <subviews>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="raa-Co-I1o">
+                            <rect key="frame" x="264" y="548" width="72" height="30"/>
+                            <color key="backgroundColor" red="1" green="0.5" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="72" id="3L4-mg-mYg"/>
+                            </constraints>
+                            <state key="normal" title="Play">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="playButtonPressed:" destination="-1" eventType="touchUpInside" id="433-YC-zsy"/>
+                            </connections>
+                        </button>
+                        <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ttZ-E1-0Bo">
+                            <rect key="frame" x="494" y="22" width="98" height="30"/>
+                            <color key="backgroundColor" red="0.80000001192092896" green="1" blue="0.40000000596046448" alpha="1" colorSpace="calibratedRGB"/>
+                            <constraints>
+                                <constraint firstAttribute="width" constant="98" id="J9P-xK-wzh"/>
+                            </constraints>
+                            <state key="normal" title="Save">
+                                <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
+                            </state>
+                            <connections>
+                                <action selector="saveButtonPressed:" destination="-1" eventType="touchUpInside" id="c0V-Gg-YPu"/>
+                            </connections>
+                        </button>
+                    </subviews>
                     <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="centerX" secondItem="raa-Co-I1o" secondAttribute="centerX" id="0pw-yp-kYo"/>
+                        <constraint firstAttribute="bottom" secondItem="raa-Co-I1o" secondAttribute="bottom" constant="22" id="8zf-Nu-Slg"/>
+                        <constraint firstAttribute="trailing" secondItem="ttZ-E1-0Bo" secondAttribute="trailing" constant="8" id="hZY-6Y-8gc"/>
+                        <constraint firstItem="ttZ-E1-0Bo" firstAttribute="top" secondItem="8oh-YT-6jn" secondAttribute="top" constant="22" id="pfZ-9H-z8K"/>
+                    </constraints>
                 </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>

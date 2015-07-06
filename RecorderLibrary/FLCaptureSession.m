@@ -45,6 +45,7 @@
 }
 
 - (NSURL *) getCompleteVideoWithAudioAsset: (AVAsset *) audioAsset {
+
     NSURL * mergedVideoURL = [[NSURL alloc] init];
     mixComposition = [[AVMutableComposition alloc] init];
     AVMutableCompositionTrack *mainTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo

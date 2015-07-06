@@ -10,8 +10,13 @@
 #import "FLPreviewView.h"
 #import "FLAbstractRecorder.h"
 
-@interface FLRecordingController : UIViewController<FLRecorderDelegate>
+@interface FLRecordingController : UIViewController<FLRecorderDelegate,FLCaptureSessionDelegate>
 
 @property (nonatomic, strong) IBOutlet FLPreviewView *previewView;
 
+@property (nonatomic, strong) IBOutlet UIButton *playButton;
+@property (nonatomic, strong) IBOutlet UIButton *saveButton;
+
+-(IBAction)playButtonPressed:(id)sender;
+-(IBAction)saveButtonPressed:(id)sender;
 @end

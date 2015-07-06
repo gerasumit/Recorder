@@ -78,7 +78,7 @@
 - (void)stopCaptureSession;
 
 - (void)toggleMovieRecording;
-- (void)completeRecording;
+- (void)completeRecordingWithAsset:(AVAsset *)asset;
 
 - (void)setFocusMode:(AVCaptureFocusMode)focusMode error:(void (^)(NSError *error))errorBlock;
 - (void)setExposureMode:(AVCaptureExposureMode)expMode error:(void (^)(NSError *error))errorBlock;

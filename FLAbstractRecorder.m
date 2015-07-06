@@ -174,8 +174,10 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 	});
 }
 
-- (void)completeRecording {
-	[self.flCaptureSession getCompleteVideoWithAudioAsset:nil];
+- (void)completeRecordingWithAsset:(AVAsset *)asset {
+    dispatch_async(self.sessionQueue, ^{
+        [self.flCaptureSession getCompleteVideoWithAudioAsset:asset];
+    });
 }
 
 
