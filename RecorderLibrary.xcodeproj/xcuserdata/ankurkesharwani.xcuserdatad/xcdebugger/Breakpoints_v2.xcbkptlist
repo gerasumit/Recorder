@@ -58,44 +58,12 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "FLAbstractRecorder.m"
-            timestampString = "457880212.576479"
+            timestampString = "457883044.136992"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "179"
-            endingLineNumber = "179"
+            startingLineNumber = "167"
+            endingLineNumber = "167"
             landmarkName = "-completeRecordingWithAsset:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RecorderLibrary/FLCaptureSession.m"
-            timestampString = "457880937.630501"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "91"
-            endingLineNumber = "91"
-            landmarkName = "-exportDidFinish:"
-            landmarkType = "5">
-         </BreakpointContent>
-      </BreakpointProxy>
-      <BreakpointProxy
-         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
-         <BreakpointContent
-            shouldBeEnabled = "Yes"
-            ignoreCount = "0"
-            continueAfterRunningActions = "No"
-            filePath = "RecorderLibrary/FLCaptureSession.m"
-            timestampString = "457880974.675513"
-            startingColumnNumber = "9223372036854775807"
-            endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "97"
-            endingLineNumber = "97"
-            landmarkName = "-exportDidFinish:"
             landmarkType = "5">
          </BreakpointContent>
       </BreakpointProxy>

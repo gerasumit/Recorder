@@ -152,24 +152,12 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 		    // Start recording to a temporary file.
 		    NSUInteger segmentIndex = [self.flCaptureSession getCurrentSegmentIndex];
 		    NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSString stringWithFormat:@"movieseg%lu", (unsigned long)segmentIndex] stringByAppendingPathExtension:@"mov"]];
+
 		    [[self movieFileOutput] startRecordingToOutputFileURL:[NSURL fileURLWithPath:outputFilePath] recordingDelegate:self];
 		}
 		else {
 		    [[self movieFileOutput] stopRecording];
 		    [self.flCaptureSession addSegmentWithURL:[self movieFileOutput].outputFileURL];
-
-		    AVCaptureMovieFileOutput *oldFileOutput = self.movieFileOutput;
-		    AVCaptureMovieFileOutput *movieFileOutput = [[AVCaptureMovieFileOutput alloc] init];
-		    if ([self.flCaptureSession canAddOutput:movieFileOutput]) {
-		        [self.flCaptureSession addOutput:movieFileOutput];
-		        AVCaptureConnection *connection = [movieFileOutput connectionWithMediaType:AVMediaTypeVideo];
-
-		        // Showing warning as the method is deprecated in 8.0
-		        if ([connection isVideoStabilizationSupported])
-					[connection setEnablesVideoStabilizationWhenAvailable:YES];
-		        [self setMovieFileOutput:movieFileOutput];
-			}
-		    NSLog(@"%@", oldFileOutput);
 		}
 	});
 }
@@ -464,18 +452,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 		NSLog(@"%@", error);
 
 	[self setLockInterfaceRotation:NO];
-
-	// Note the backgroundRecordingID for use in the ALAssetsLibrary completion handler to end the background task associated with this recording. This allows a new recording to be started, associated with a new UIBackgroundTaskIdentifier, once the movie file output's -isRecording is back to NO — which happens sometime after this method returns.
-	UIBackgroundTaskIdentifier backgroundRecordingID = [self backgroundRecordingID];
-	[self setBackgroundRecordingID:UIBackgroundTaskInvalid];
-
-	[[[ALAssetsLibrary alloc] init] writeVideoAtPathToSavedPhotosAlbum:outputFileURL completionBlock: ^(NSURL *assetURL, NSError *error) {
-	    if (error)
-			NSLog(@"%@", error);
-
-	    if (backgroundRecordingID != UIBackgroundTaskInvalid)
-			[[UIApplication sharedApplication] endBackgroundTask:backgroundRecordingID];
-	}];
 }
 
 

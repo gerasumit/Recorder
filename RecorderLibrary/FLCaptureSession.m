@@ -32,6 +32,8 @@
 
 - (void) removeSegmentWithURL:(NSURL *)url {
     [videoSegments removeObject:url.path];
+    NSFileManager *fileManager = [NSFileManager defaultManager];
+    [fileManager removeItemAtPath:url.path  error:NULL];
 }
 
 - (NSUInteger) getCurrentSegmentIndex {
@@ -74,14 +76,17 @@
     NSURL *url = [NSURL fileURLWithPath:myPathDocs];
     // 5 - Create exporter
     AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:mixComposition
-                                                                      presetName:AVAssetExportPresetHighestQuality];
+                                                                      presetName:AVAssetExportPresetLowQuality];
     exporter.outputURL=url;
     exporter.outputFileType = AVFileTypeQuickTimeMovie;
-    exporter.shouldOptimizeForNetworkUse = YES;
+    exporter.shouldOptimizeForNetworkUse = NO;
     [exporter exportAsynchronouslyWithCompletionHandler:^{
-        dispatch_async(dispatch_get_main_queue(), ^{
-            [self exportDidFinish:exporter];
-        });
+        [self exportDidFinish:exporter];
+        
+        for (int i = 0; i<videoSegments.count; i++) {
+            [self removeSegmentWithURL:[NSURL URLWithString:videoSegments[i]]];
+        }
+        
     }];
     
     return mergedVideoURL;
