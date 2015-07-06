@@ -49,20 +49,30 @@
 - (NSURL *)getCompleteVideoWithAudioAsset:(AVAsset *)audioAsset {
 	NSURL *mergedVideoURL = [[NSURL alloc] init];
 	mixComposition = [[AVMutableComposition alloc] init];
-	AVMutableCompositionTrack *mainTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo
+    
+	AVMutableCompositionTrack *mainTrackVideo = [mixComposition addMutableTrackWithMediaType:AVMediaTypeVideo
 	                                                                   preferredTrackID:kCMPersistentTrackID_Invalid];
+    
+    AVMutableCompositionTrack *mainTrackAudio = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
+                                                                       preferredTrackID:kCMPersistentTrackID_Invalid];
+    
 	for (NSString *path in videoSegments) {
 		NSURL *videoURL = [NSURL fileURLWithPath:path];
 		AVURLAsset *currentVideoSegment = [AVURLAsset URLAssetWithURL:videoURL options:nil];
+        
+        
+        
 		NSLog(@"%@", [currentVideoSegment tracksWithMediaType:AVMediaTypeVideo]);
 		if (currentVideoSegment != nil) {
-			[mainTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, currentVideoSegment.duration)
-			                   ofTrack:[[currentVideoSegment tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:mainTrack.timeRange.duration error:nil];
+			[mainTrackVideo insertTimeRange:CMTimeRangeMake(kCMTimeZero, currentVideoSegment.duration)
+			                   ofTrack:[[currentVideoSegment tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] atTime:mainTrackVideo.timeRange.duration error:nil];
+            [mainTrackAudio insertTimeRange:CMTimeRangeMake(kCMTimeZero, currentVideoSegment.duration)
+                               ofTrack:[[currentVideoSegment tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:mainTrackAudio.timeRange.duration error:nil];
 		}
         
         AVAssetTrack * currentTrack = [[currentVideoSegment tracksWithMediaType:AVMediaTypeVideo] objectAtIndex:0] ;
-        if (currentTrack && mainTrack) {
-            [mainTrack setPreferredTransform:currentTrack.preferredTransform];
+        if (currentTrack && mainTrackVideo) {
+            [mainTrackVideo setPreferredTransform:currentTrack.preferredTransform];
         }
         
 	}
@@ -70,7 +80,7 @@
 	if (audioAsset != nil) {
 		AVMutableCompositionTrack *AudioTrack = [mixComposition addMutableTrackWithMediaType:AVMediaTypeAudio
 		                                                                    preferredTrackID:kCMPersistentTrackID_Invalid];
-		[AudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, mainTrack.timeRange.duration)
+		[AudioTrack insertTimeRange:CMTimeRangeMake(kCMTimeZero, mainTrackAudio.timeRange.duration)
 		                    ofTrack:[[audioAsset tracksWithMediaType:AVMediaTypeAudio] objectAtIndex:0] atTime:kCMTimeZero error:nil];
 	}
 
