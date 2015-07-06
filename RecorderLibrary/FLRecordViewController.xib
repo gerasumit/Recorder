@@ -101,10 +101,10 @@
                             <exclude reference="7gH-E7-Dia"/>
                         </mask>
                         <mask key="constraints">
-                            <exclude reference="4XU-Hn-i6a"/>
-                            <exclude reference="DZj-Q7-clH"/>
                             <exclude reference="WHh-9o-kPV"/>
                             <exclude reference="w2D-2q-PZe"/>
+                            <exclude reference="4XU-Hn-i6a"/>
+                            <exclude reference="DZj-Q7-clH"/>
                         </mask>
                     </variation>
                     <variation key="widthClass=compact">
@@ -113,10 +113,10 @@
                             <include reference="7gH-E7-Dia"/>
                         </mask>
                         <mask key="constraints">
-                            <include reference="4XU-Hn-i6a"/>
-                            <include reference="DZj-Q7-clH"/>
                             <include reference="WHh-9o-kPV"/>
                             <include reference="w2D-2q-PZe"/>
+                            <include reference="4XU-Hn-i6a"/>
+                            <include reference="DZj-Q7-clH"/>
                         </mask>
                     </variation>
                 </view>
@@ -193,11 +193,11 @@
                 <mask key="constraints">
                     <exclude reference="qSe-xq-WWD"/>
                     <exclude reference="zbC-WN-V89"/>
+                    <exclude reference="QCl-Q4-4bO"/>
                     <exclude reference="DdS-Bk-IPC"/>
                     <exclude reference="EJR-FH-b6t"/>
                     <exclude reference="NO5-HM-NPb"/>
                     <exclude reference="qR2-Bn-O1y"/>
-                    <exclude reference="QCl-Q4-4bO"/>
                 </mask>
             </variation>
             <variation key="widthClass=compact">
@@ -214,6 +214,7 @@
                     <include reference="qR2-Bn-O1y"/>
                 </mask>
             </variation>
+            <point key="canvasLocation" x="100" y="441"/>
         </view>
     </objects>
 </document>

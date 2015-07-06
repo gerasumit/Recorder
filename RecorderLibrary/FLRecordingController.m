@@ -22,17 +22,18 @@
     [super viewDidLoad];
     [self setTitle:@"Ankur's VC"];
     self.recorderLib  = [[FLRecorder alloc] init];
-    [self.recorderLib initializeWithPreviewView:self.previewView andDelegate:nil];
+    [self.recorderLib configWithCompletionBlock:nil error:nil];
+    [self.recorderLib setDelegate:self];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
-    [self.recorderLib startSession];
+    [self.recorderLib startCaptureSession];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
     [super viewWillDisappear:animated];
-    [self.recorderLib stopSession];
+    [self.recorderLib stopCaptureSession];
 }
 
 - (BOOL)prefersStatusBarHidden
