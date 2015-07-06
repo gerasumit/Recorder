@@ -8,8 +8,9 @@
 
 #import <UIKit/UIKit.h>
 #import "FLPreviewView.h"
+#import "FLAbstractRecorder.h"
 
-@interface FLRecordingController : UIViewController
+@interface FLRecordingController : UIViewController<FLRecorderDelegate>
 
 @property (nonatomic, strong) IBOutlet FLPreviewView *previewView;
 

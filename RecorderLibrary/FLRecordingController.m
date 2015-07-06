@@ -11,7 +11,7 @@
 
 @interface FLRecordingController ()
 
-@property (nonatomic, strong) FLRecorder *recorderLib;
+@property (nonatomic, strong) FLAbstractRecorder *recorderLib;
 
 
 @end
@@ -22,13 +22,14 @@
     [super viewDidLoad];
     [self setTitle:@"Ankur's VC"];
     self.recorderLib  = [[FLRecorder alloc] init];
-    [self.recorderLib configWithCompletionBlock:nil error:nil];
     [self.recorderLib setDelegate:self];
+    [self.recorderLib configWithPreviewView:self.previewView completionBlock:nil error:nil];
 }
 
 -(void)viewWillAppear:(BOOL)animated{
     [super viewWillAppear:animated];
     [self.recorderLib startCaptureSession];
+    [self.recorderLib setTint:100 error:nil];
 }
 
 -(void)viewWillDisappear:(BOOL)animated{
