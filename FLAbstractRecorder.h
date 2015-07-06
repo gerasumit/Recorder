@@ -18,10 +18,6 @@
 @protocol FLRecorderDelegate <NSObject>
 
 @optional
-/*!
- *  @discussion Called when the decice is not autorized to use the camera.
- */
-- (void)deviceNotAuthorized;
 
 /*!
  *  @discussion Called when recording context changes. Use this method to control the states of your recording play/pause buttons and other ui elements.
@@ -35,10 +31,6 @@
  */
 - (void)sessionRunningAndDeviceAuthorizedContextChanged:(BOOL)isRunning;
 
-/*!
- *  @discussion Called when the camera is changed.
- */
-- (void)cameraSwitched;
 
 @end
 

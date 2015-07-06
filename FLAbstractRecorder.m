@@ -502,14 +502,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 		}
 	    else {
 	        [self setDeviceAuthorized:NO];
-
-	        //Not granted access to mediaType
-	        dispatch_async(dispatch_get_main_queue(), ^{
-				// Notify the delegate that the device is not autorized to use the camera.
-				if ([self.delegate respondsToSelector:@selector(deviceNotAuthorized)]) {
-				    [self.delegate deviceNotAuthorized];
-				}
-			});
 		}
 	}];
 }
