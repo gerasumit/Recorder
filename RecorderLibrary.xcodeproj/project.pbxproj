@@ -9,18 +9,23 @@
 /* Begin PBXBuildFile section */
 		10758D6C1B46DB9A00196986 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D6B1B46DB9A00196986 /* main.m */; };
 		10758D6F1B46DB9A00196986 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D6E1B46DB9A00196986 /* AppDelegate.m */; };
-		10758D721B46DB9A00196986 /* FLRecordViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D711B46DB9A00196986 /* FLRecordViewController.m */; };
 		10758D751B46DB9A00196986 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 10758D731B46DB9A00196986 /* Main.storyboard */; };
 		10758D771B46DB9A00196986 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 10758D761B46DB9A00196986 /* Images.xcassets */; };
 		10758D7A1B46DB9A00196986 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10758D781B46DB9A00196986 /* LaunchScreen.xib */; };
 		10758D861B46DB9A00196986 /* RecorderLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D851B46DB9A00196986 /* RecorderLibraryTests.m */; };
-		10758D941B477CE000196986 /* FLRecordViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 10758D931B477CE000196986 /* FLRecordViewController.xib */; };
 		10758D971B4785F800196986 /* FLPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D961B4785F800196986 /* FLPreviewView.m */; };
 		10758D9D1B47AECA00196986 /* FLCaptureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D9C1B47AECA00196986 /* FLCaptureSession.m */; };
 		4751DE471B47B833000DC867 /* FLAbstractRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4751DE461B47B833000DC867 /* FLAbstractRecorder.m */; };
 		4751DE4B1B47CF15000DC867 /* FLRecordingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4751DE491B47CF15000DC867 /* FLRecordingController.m */; };
 		4751DE4C1B47CF15000DC867 /* FLRecordingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4751DE4A1B47CF15000DC867 /* FLRecordingController.xib */; };
 		475C0E971B4A94FC008D98DB /* FLRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 475C0E961B4A94FC008D98DB /* FLRecorder.m */; };
+		47BA76E11B4C494A00238759 /* FLFilterVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BA76E01B4C494A00238759 /* FLFilterVideoPlayer.m */; };
+		47BA76E41B4C496300238759 /* FLFilterFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BA76E31B4C496300238759 /* FLFilterFactory.m */; };
+		47BA76E61B4C49CA00238759 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BA76E51B4C49CA00238759 /* CoreImage.framework */; };
+		47BA76E81B4C49DA00238759 /* GLKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BA76E71B4C49DA00238759 /* GLKit.framework */; };
+		47BA76EC1B4C5B1C00238759 /* FLVideoPlayController.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BA76EA1B4C5B1C00238759 /* FLVideoPlayController.m */; };
+		47BA76ED1B4C5B1C00238759 /* FLVideoPlayController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 47BA76EB1B4C5B1C00238759 /* FLVideoPlayController.xib */; };
+		47BA76EF1B4C5E3700238759 /* video.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 47BA76EE1B4C5E3700238759 /* video.mp4 */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -37,17 +42,14 @@
 		10758D661B46DB9A00196986 /* RecorderLibrary.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = RecorderLibrary.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		10758D6A1B46DB9A00196986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10758D6B1B46DB9A00196986 /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		10758D6D1B46DB9A00196986 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
-		10758D6E1B46DB9A00196986 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		10758D701B46DB9A00196986 /* FLRecordViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = FLRecordViewController.h; sourceTree = "<group>"; };
-		10758D711B46DB9A00196986 /* FLRecordViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FLRecordViewController.m; sourceTree = "<group>"; };
+		10758D6D1B46DB9A00196986 /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = AppDelegate.h; path = RecorderLibrary/AppDelegate.h; sourceTree = "<group>"; };
+		10758D6E1B46DB9A00196986 /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; name = AppDelegate.m; path = RecorderLibrary/AppDelegate.m; sourceTree = "<group>"; };
 		10758D741B46DB9A00196986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		10758D761B46DB9A00196986 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		10758D791B46DB9A00196986 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
 		10758D7F1B46DB9A00196986 /* RecorderLibraryTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = RecorderLibraryTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		10758D841B46DB9A00196986 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		10758D851B46DB9A00196986 /* RecorderLibraryTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = RecorderLibraryTests.m; sourceTree = "<group>"; };
-		10758D931B477CE000196986 /* FLRecordViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLRecordViewController.xib; sourceTree = "<group>"; };
 		10758D951B4785F800196986 /* FLPreviewView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLPreviewView.h; path = RecorderLibrary/FLPreviewView.h; sourceTree = "<group>"; };
 		10758D961B4785F800196986 /* FLPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLPreviewView.m; path = RecorderLibrary/FLPreviewView.m; sourceTree = "<group>"; };
 		10758D9B1B47AECA00196986 /* FLCaptureSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLCaptureSession.h; path = RecorderLibrary/FLCaptureSession.h; sourceTree = "<group>"; };
@@ -59,6 +61,16 @@
 		4751DE4A1B47CF15000DC867 /* FLRecordingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FLRecordingController.xib; path = RecorderLibrary/FLRecordingController.xib; sourceTree = "<group>"; };
 		475C0E951B4A94FC008D98DB /* FLRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLRecorder.h; sourceTree = "<group>"; };
 		475C0E961B4A94FC008D98DB /* FLRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLRecorder.m; sourceTree = "<group>"; };
+		47BA76DF1B4C494A00238759 /* FLFilterVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLFilterVideoPlayer.h; sourceTree = "<group>"; };
+		47BA76E01B4C494A00238759 /* FLFilterVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFilterVideoPlayer.m; sourceTree = "<group>"; };
+		47BA76E21B4C496300238759 /* FLFilterFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLFilterFactory.h; sourceTree = "<group>"; };
+		47BA76E31B4C496300238759 /* FLFilterFactory.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFilterFactory.m; sourceTree = "<group>"; };
+		47BA76E51B4C49CA00238759 /* CoreImage.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreImage.framework; path = System/Library/Frameworks/CoreImage.framework; sourceTree = SDKROOT; };
+		47BA76E71B4C49DA00238759 /* GLKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = GLKit.framework; path = System/Library/Frameworks/GLKit.framework; sourceTree = SDKROOT; };
+		47BA76E91B4C5B1C00238759 /* FLVideoPlayController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLVideoPlayController.h; sourceTree = "<group>"; };
+		47BA76EA1B4C5B1C00238759 /* FLVideoPlayController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLVideoPlayController.m; sourceTree = "<group>"; };
+		47BA76EB1B4C5B1C00238759 /* FLVideoPlayController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLVideoPlayController.xib; sourceTree = "<group>"; };
+		47BA76EE1B4C5E3700238759 /* video.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = video.mp4; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +78,8 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				47BA76E81B4C49DA00238759 /* GLKit.framework in Frameworks */,
+				47BA76E61B4C49CA00238759 /* CoreImage.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -82,9 +96,14 @@
 		10758D5D1B46DB9A00196986 = {
 			isa = PBXGroup;
 			children = (
+				47BA76EE1B4C5E3700238759 /* video.mp4 */,
+				47BA76E71B4C49DA00238759 /* GLKit.framework */,
+				47BA76E51B4C49CA00238759 /* CoreImage.framework */,
 				4751DE4D1B47CF32000DC867 /* FLRecordingController */,
-				4751DE411B47B793000DC867 /* FLRecorder */,
 				10758D681B46DB9A00196986 /* RecorderLibrary */,
+				10758D6D1B46DB9A00196986 /* AppDelegate.h */,
+				10758D6E1B46DB9A00196986 /* AppDelegate.m */,
+				10758D691B46DB9A00196986 /* Supporting Files */,
 				10758D821B46DB9A00196986 /* RecorderLibraryTests */,
 				10758D671B46DB9A00196986 /* Products */,
 			);
@@ -102,15 +121,8 @@
 		10758D681B46DB9A00196986 /* RecorderLibrary */ = {
 			isa = PBXGroup;
 			children = (
-				10758D6D1B46DB9A00196986 /* AppDelegate.h */,
-				10758D6E1B46DB9A00196986 /* AppDelegate.m */,
-				10758D701B46DB9A00196986 /* FLRecordViewController.h */,
-				10758D711B46DB9A00196986 /* FLRecordViewController.m */,
-				10758D931B477CE000196986 /* FLRecordViewController.xib */,
-				10758D731B46DB9A00196986 /* Main.storyboard */,
-				10758D761B46DB9A00196986 /* Images.xcassets */,
-				10758D781B46DB9A00196986 /* LaunchScreen.xib */,
-				10758D691B46DB9A00196986 /* Supporting Files */,
+				4751DE411B47B793000DC867 /* FLRecorder */,
+				47BA76DB1B4C48CB00238759 /* FLFilterProcessor */,
 			);
 			path = RecorderLibrary;
 			sourceTree = "<group>";
@@ -118,10 +130,14 @@
 		10758D691B46DB9A00196986 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				10758D731B46DB9A00196986 /* Main.storyboard */,
+				10758D761B46DB9A00196986 /* Images.xcassets */,
+				10758D781B46DB9A00196986 /* LaunchScreen.xib */,
 				10758D6A1B46DB9A00196986 /* Info.plist */,
 				10758D6B1B46DB9A00196986 /* main.m */,
 			);
 			name = "Supporting Files";
+			path = RecorderLibrary;
 			sourceTree = "<group>";
 		};
 		10758D821B46DB9A00196986 /* RecorderLibraryTests */ = {
@@ -149,6 +165,7 @@
 				4751DE421B47B7AD000DC867 /* FLPreviewView */,
 			);
 			name = FLRecorder;
+			path = ..;
 			sourceTree = "<group>";
 		};
 		4751DE421B47B7AD000DC867 /* FLPreviewView */ = {
@@ -186,8 +203,23 @@
 				4751DE481B47CF15000DC867 /* FLRecordingController.h */,
 				4751DE491B47CF15000DC867 /* FLRecordingController.m */,
 				4751DE4A1B47CF15000DC867 /* FLRecordingController.xib */,
+				47BA76E91B4C5B1C00238759 /* FLVideoPlayController.h */,
+				47BA76EA1B4C5B1C00238759 /* FLVideoPlayController.m */,
+				47BA76EB1B4C5B1C00238759 /* FLVideoPlayController.xib */,
 			);
 			name = FLRecordingController;
+			sourceTree = "<group>";
+		};
+		47BA76DB1B4C48CB00238759 /* FLFilterProcessor */ = {
+			isa = PBXGroup;
+			children = (
+				47BA76DF1B4C494A00238759 /* FLFilterVideoPlayer.h */,
+				47BA76E01B4C494A00238759 /* FLFilterVideoPlayer.m */,
+				47BA76E21B4C496300238759 /* FLFilterFactory.h */,
+				47BA76E31B4C496300238759 /* FLFilterFactory.m */,
+			);
+			name = FLFilterProcessor;
+			path = ..;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -270,7 +302,8 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				10758D941B477CE000196986 /* FLRecordViewController.xib in Resources */,
+				47BA76EF1B4C5E3700238759 /* video.mp4 in Resources */,
+				47BA76ED1B4C5B1C00238759 /* FLVideoPlayController.xib in Resources */,
 				10758D751B46DB9A00196986 /* Main.storyboard in Resources */,
 				4751DE4C1B47CF15000DC867 /* FLRecordingController.xib in Resources */,
 				10758D7A1B46DB9A00196986 /* LaunchScreen.xib in Resources */,
@@ -293,13 +326,15 @@
 			buildActionMask = 2147483647;
 			files = (
 				4751DE4B1B47CF15000DC867 /* FLRecordingController.m in Sources */,
-				10758D721B46DB9A00196986 /* FLRecordViewController.m in Sources */,
+				47BA76E11B4C494A00238759 /* FLFilterVideoPlayer.m in Sources */,
 				10758D971B4785F800196986 /* FLPreviewView.m in Sources */,
+				47BA76E41B4C496300238759 /* FLFilterFactory.m in Sources */,
 				10758D6F1B46DB9A00196986 /* AppDelegate.m in Sources */,
 				10758D6C1B46DB9A00196986 /* main.m in Sources */,
 				10758D9D1B47AECA00196986 /* FLCaptureSession.m in Sources */,
 				4751DE471B47B833000DC867 /* FLAbstractRecorder.m in Sources */,
 				475C0E971B4A94FC008D98DB /* FLRecorder.m in Sources */,
+				47BA76EC1B4C5B1C00238759 /* FLVideoPlayController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

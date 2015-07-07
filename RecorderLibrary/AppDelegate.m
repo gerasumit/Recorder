@@ -7,7 +7,7 @@
 //
 
 #import "AppDelegate.h"
-#import "FLRecordViewController.h"
+#import "FLVideoPlayController.h"
 #import "FLRecordingController.h"
 
 @interface AppDelegate ()
@@ -19,9 +19,12 @@
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     // Override point for customization after application launch.
+    
     FLRecordingController *ctrl = [[FLRecordingController alloc] initWithNibName:@"FLRecordingController" bundle:nil];
     
-    self.window.rootViewController = ctrl;
+    FLVideoPlayController *ctrl1 = [[FLVideoPlayController alloc] initWithNibName:@"FLVideoPlayController" bundle:nil];
+    
+    self.window.rootViewController = ctrl1;
     return YES;
 }
 

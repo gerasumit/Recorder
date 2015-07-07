@@ -64,12 +64,32 @@
  *  END: LEAVE THESE PROPERTIES ALONE.
  */
 
-
+/*!
+ * @discussion Configure the device and capture session. 
+ * @param previewView The instance of the FLPreviewView. This view renders the preview from the camera.
+ * @param completionBlock The block which gets called when the config process ends successfully.
+ * @param errorBlock The block which gets called when the config process ends with an error.
+ */
 - (void)configWithPreviewView:(FLPreviewView*)previewView completionBlock:(void (^)(void))completionBlock error:(void (^)(NSError *error))errorBlock;
+
+/*!
+ * @discussion Starts a new capture session. Must be called after congig.
+ */
 - (void)startCaptureSession;
+
+/*!
+ * @discussion Stops a currently running capture session.
+ */
 - (void)stopCaptureSession;
 
+/*!
+ * @discussion Starts/ Stops the recording.
+ */
 - (void)toggleMovieRecording;
+
+/*!
+ * @discussion Completes the recording and saves it.
+ */
 - (void)completeRecordingWithAsset:(AVAsset *)asset;
 
 - (void)setFocusMode:(AVCaptureFocusMode)focusMode error:(void (^)(NSError *error))errorBlock;
