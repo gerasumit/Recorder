@@ -90,7 +90,7 @@
 	                         [NSString stringWithFormat:@"mergeVideo-%d.mov", arc4random() % 1000]];
 	NSURL *url = [NSURL fileURLWithPath:myPathDocs];
 	// 5 - Create exporter
-	AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:mixComposition
+    AVAssetExportSession *exporter = [[AVAssetExportSession alloc] initWithAsset:mixComposition
 	                                                                  presetName:AVAssetExportPresetHighestQuality];
 	exporter.outputURL = url;
 	exporter.outputFileType = AVFileTypeQuickTimeMovie;
@@ -121,8 +121,8 @@
 							[self.delegate assetExportFailedWithError:error];
 					}
 					else {
-					    if ([self.delegate respondsToSelector:@selector(assetExportCompleted)]) {
-					        [self.delegate assetExportCompleted];
+                        if ([self.delegate respondsToSelector:@selector(assetExportCompleted:)]) {
+                            [self.delegate assetExportCompleted: outputURL];
 						}
 					}
 				});

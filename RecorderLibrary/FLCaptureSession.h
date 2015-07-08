@@ -18,7 +18,7 @@
 
 @protocol FLCaptureSessionDelegate <NSObject>
 
-- (void)assetExportCompleted;
+- (void)assetExportCompleted: (NSURL *) assetURL;
 - (void)assetExportFailedWithError:(NSError *)anError;
 
 @end

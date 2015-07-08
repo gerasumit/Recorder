@@ -9,6 +9,8 @@
 #import "FLVideoPlayController.h"
 #import "FLFilterVideoPlayer.h"
 #import <GLKit/GLKit.h>
+#import "FLAssetExportSession.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface FLVideoPlayController ()<FLFilterVideoPlayerDelegate>
 
@@ -40,6 +42,22 @@
 
 -(IBAction)togglePlay:(id)sender{
     [self.filterVideoPlayer play];
+    FLAssetExportSession * assetExportSession = [[FLAssetExportSession alloc] initWithAsset:[AVAsset assetWithURL:[[NSBundle mainBundle] URLForResource:@"video" withExtension:@"mp4"]] presetName:FLAssetExportSessionPresetHighestQuality];
+    assetExportSession.filterArray = [NSArray arrayWithObjects:[CIFilter filterWithName:@"CISepiaTone"
+                                                                          keysAndValues:kCIInputIntensityKey, @0.8, nil], nil];
+    assetExportSession.outputFileType = AVFileTypeMPEG4;
+    NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"videomerged.mp4"];
+    assetExportSession.outputURL = [NSURL fileURLWithPath:filePath];
+    [assetExportSession exportAsynchronouslyWithCompletionHandler:^{
+        
+        if (assetExportSession.error == nil) {
+            ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
+            [library writeVideoAtPathToSavedPhotosAlbum:assetExportSession.outputURL completionBlock:nil];
+            //            completionHandler(assetExportSession.outputURL, assetExportSession.error);
+        } else {
+            NSLog(@"Something bad happened");
+        }
+    }];
 }
 
 -(void)playerStatusChanged:(BOOL)readyToPlay{

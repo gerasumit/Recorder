@@ -8,6 +8,7 @@
 
 #import "FLRecordingController.h"
 #import "FLRecorder.h"
+#import "FLAssetExportSession.h"
 
 @interface FLRecordingController ()
 
@@ -73,7 +74,7 @@
     }
 }
 
-- (void)assetExportCompleted{
+- (void)assetExportCompleted:(NSURL *)assetURL{
     UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:@"Success"
                                           message:@"Video saved successfuly."

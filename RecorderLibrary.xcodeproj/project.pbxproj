@@ -15,6 +15,7 @@
 		10758D861B46DB9A00196986 /* RecorderLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D851B46DB9A00196986 /* RecorderLibraryTests.m */; };
 		10758D971B4785F800196986 /* FLPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D961B4785F800196986 /* FLPreviewView.m */; };
 		10758D9D1B47AECA00196986 /* FLCaptureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D9C1B47AECA00196986 /* FLCaptureSession.m */; };
+		10B1CF2D1B4D184800667B3C /* FLAssetExportSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 10B1CF2C1B4D184800667B3C /* FLAssetExportSession.m */; };
 		4751DE471B47B833000DC867 /* FLAbstractRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4751DE461B47B833000DC867 /* FLAbstractRecorder.m */; };
 		4751DE4B1B47CF15000DC867 /* FLRecordingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4751DE491B47CF15000DC867 /* FLRecordingController.m */; };
 		4751DE4C1B47CF15000DC867 /* FLRecordingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4751DE4A1B47CF15000DC867 /* FLRecordingController.xib */; };
@@ -54,6 +55,8 @@
 		10758D961B4785F800196986 /* FLPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLPreviewView.m; path = RecorderLibrary/FLPreviewView.m; sourceTree = "<group>"; };
 		10758D9B1B47AECA00196986 /* FLCaptureSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLCaptureSession.h; path = RecorderLibrary/FLCaptureSession.h; sourceTree = "<group>"; };
 		10758D9C1B47AECA00196986 /* FLCaptureSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLCaptureSession.m; path = RecorderLibrary/FLCaptureSession.m; sourceTree = "<group>"; };
+		10B1CF2B1B4D184800667B3C /* FLAssetExportSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAssetExportSession.h; sourceTree = "<group>"; };
+		10B1CF2C1B4D184800667B3C /* FLAssetExportSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAssetExportSession.m; sourceTree = "<group>"; };
 		4751DE451B47B833000DC867 /* FLAbstractRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAbstractRecorder.h; sourceTree = "<group>"; };
 		4751DE461B47B833000DC867 /* FLAbstractRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAbstractRecorder.m; sourceTree = "<group>"; };
 		4751DE481B47CF15000DC867 /* FLRecordingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLRecordingController.h; path = RecorderLibrary/FLRecordingController.h; sourceTree = "<group>"; };
@@ -157,9 +160,19 @@
 			name = "Supporting Files";
 			sourceTree = "<group>";
 		};
+		10B1CF2E1B4D184F00667B3C /* FLAssetExportSession */ = {
+			isa = PBXGroup;
+			children = (
+				10B1CF2B1B4D184800667B3C /* FLAssetExportSession.h */,
+				10B1CF2C1B4D184800667B3C /* FLAssetExportSession.m */,
+			);
+			name = FLAssetExportSession;
+			sourceTree = "<group>";
+		};
 		4751DE411B47B793000DC867 /* FLRecorder */ = {
 			isa = PBXGroup;
 			children = (
+				10B1CF2E1B4D184F00667B3C /* FLAssetExportSession */,
 				4751DE441B47B7F3000DC867 /* FLRecorder */,
 				4751DE431B47B7D2000DC867 /* FLCaptureSession */,
 				4751DE421B47B7AD000DC867 /* FLPreviewView */,
@@ -329,6 +342,7 @@
 				47BA76E11B4C494A00238759 /* FLFilterVideoPlayer.m in Sources */,
 				10758D971B4785F800196986 /* FLPreviewView.m in Sources */,
 				47BA76E41B4C496300238759 /* FLFilterFactory.m in Sources */,
+				10B1CF2D1B4D184800667B3C /* FLAssetExportSession.m in Sources */,
 				10758D6F1B46DB9A00196986 /* AppDelegate.m in Sources */,
 				10758D6C1B46DB9A00196986 /* main.m in Sources */,
 				10758D9D1B47AECA00196986 /* FLCaptureSession.m in Sources */,
