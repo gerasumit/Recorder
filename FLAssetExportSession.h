@@ -25,6 +25,6 @@
 @property (strong, nonatomic) NSDictionary *videoSettings;
 
 
-- (void)exportAsynchronouslyWithCompletionHandler:(void (^)())completionHandler;
+- (void)exportAsynchronouslyWithCompletionHandler:(void (^)(void))completionHandler;
 
 @end

@@ -89,9 +89,7 @@
         }
         
         CIImage *image = [CIImage imageWithCVPixelBuffer:pixelBuffer];
-        CIFilter *ciFilter = [self.filterArray objectAtIndex:0];
-        [ciFilter setValue:image forKey:kCIInputImageKey];
-        CIImage *result = [ciFilter valueForKey:kCIOutputImageKey];
+        CIImage * result = [self filterImage:image];
         
         CVPixelBufferRef outputPixelBuffer = nil;
         CVPixelBufferPoolCreatePixelBuffer(NULL, [_videoPixelAdaptor pixelBufferPool], &outputPixelBuffer);
@@ -287,7 +285,7 @@
     }
 }
 
-- (void)exportAsynchronouslyWithCompletionHandler:(void (^)())completionHandler {
+- (void)exportAsynchronouslyWithCompletionHandler:(void (^)(void))completionHandler {
     _nextAllowedVideoFrame = kCMTimeZero;
     NSError *error = nil;
     
@@ -369,6 +367,17 @@
             [self callCompletionHandler:completionHandler];
         }
     });
+}
+
+- (CIImage *) filterImage: (CIImage *) image {
+    CIImage * result = image;
+    
+    for (CIFilter * filter in self.filterArray) {
+        [filter setValue:result forKey:kCIInputImageKey];
+        result = [filter valueForKey:kCIOutputImageKey];
+    }
+    
+    return result;
 }
 
 - (NSError *)error {

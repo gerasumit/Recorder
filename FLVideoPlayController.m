@@ -42,22 +42,6 @@
 
 -(IBAction)togglePlay:(id)sender{
     [self.filterVideoPlayer play];
-    FLAssetExportSession * assetExportSession = [[FLAssetExportSession alloc] initWithAsset:[AVAsset assetWithURL:[[NSBundle mainBundle] URLForResource:@"video" withExtension:@"mp4"]] presetName:FLAssetExportSessionPresetHighestQuality];
-    assetExportSession.filterArray = [NSArray arrayWithObjects:[CIFilter filterWithName:@"CISepiaTone"
-                                                                          keysAndValues:kCIInputIntensityKey, @0.8, nil], nil];
-    assetExportSession.outputFileType = AVFileTypeMPEG4;
-    NSString *filePath = [NSTemporaryDirectory() stringByAppendingPathComponent:@"videomerged.mp4"];
-    assetExportSession.outputURL = [NSURL fileURLWithPath:filePath];
-    [assetExportSession exportAsynchronouslyWithCompletionHandler:^{
-        
-        if (assetExportSession.error == nil) {
-            ALAssetsLibrary * library = [[ALAssetsLibrary alloc] init];
-            [library writeVideoAtPathToSavedPhotosAlbum:assetExportSession.outputURL completionBlock:nil];
-            //            completionHandler(assetExportSession.outputURL, assetExportSession.error);
-        } else {
-            NSLog(@"Something bad happened");
-        }
-    }];
 }
 
 -(void)playerStatusChanged:(BOOL)readyToPlay{
@@ -74,6 +58,29 @@
 
 -(void)onTimeUpdate:(CMTime)cmTime{
     
+}
+
+- (void) exportVideoAsset: (AVAsset *) videoAsset filterArray: (NSArray *) filterArray outputURL: (NSURL *) outputURL outputFileType: (NSString *) outputFileType andAssetExportSessionPreset: (NSString *) assetExportSessionPreset {
+    
+    // videoAsset: Expected AVAsset with video and audio Tracks
+    // filterArray: NSArray with CIFilters to be applied in cascaded fashion
+    // outputURL: Required filePath of the exported video
+    // outputFileType: Required fileType
+    // assetExportSessionPreset: Required session preset at which video is to be exported
+    
+    FLAssetExportSession * assetExportSession = [[FLAssetExportSession alloc] initWithAsset:videoAsset presetName:assetExportSessionPreset];
+    
+    assetExportSession.filterArray = filterArray;
+    assetExportSession.outputFileType = outputFileType;
+    assetExportSession.outputURL = outputURL;
+    [assetExportSession exportAsynchronouslyWithCompletionHandler: ^{
+        
+        if (assetExportSession.error == nil) {
+            NSLog(@"Video exported successfully! URL : %@", assetExportSession.outputURL);
+        } else {
+            NSLog(@"Something bad happened");
+        }
+    }];
 }
 
 @end
