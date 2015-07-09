@@ -8,8 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-IB_DESIGNABLE
-@interface FLCircularProgressView : UIView
+@interface FLAbstractCircularProgressBar : UIView
 
 @property (nonatomic, weak) IBOutlet UIView *contentView;
 

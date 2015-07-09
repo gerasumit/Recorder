@@ -24,7 +24,7 @@
     
     FLVideoPlayController *ctrl1 = [[FLVideoPlayController alloc] initWithNibName:@"FLVideoPlayController" bundle:nil];
     
-    self.window.rootViewController = ctrl1;
+    self.window.rootViewController = ctrl;
     return YES;
 }
 

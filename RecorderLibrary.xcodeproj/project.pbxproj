@@ -15,12 +15,12 @@
 		10758D861B46DB9A00196986 /* RecorderLibraryTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D851B46DB9A00196986 /* RecorderLibraryTests.m */; };
 		10758D971B4785F800196986 /* FLPreviewView.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D961B4785F800196986 /* FLPreviewView.m */; };
 		10758D9D1B47AECA00196986 /* FLCaptureSession.m in Sources */ = {isa = PBXBuildFile; fileRef = 10758D9C1B47AECA00196986 /* FLCaptureSession.m */; };
+		474A25691B4E547A0030E3B2 /* FLTimedCircularProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 474A25681B4E547A0030E3B2 /* FLTimedCircularProgressBar.m */; };
 		4751DE471B47B833000DC867 /* FLAbstractRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 4751DE461B47B833000DC867 /* FLAbstractRecorder.m */; };
 		4751DE4B1B47CF15000DC867 /* FLRecordingController.m in Sources */ = {isa = PBXBuildFile; fileRef = 4751DE491B47CF15000DC867 /* FLRecordingController.m */; };
 		4751DE4C1B47CF15000DC867 /* FLRecordingController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4751DE4A1B47CF15000DC867 /* FLRecordingController.xib */; };
 		475C0E971B4A94FC008D98DB /* FLRecorder.m in Sources */ = {isa = PBXBuildFile; fileRef = 475C0E961B4A94FC008D98DB /* FLRecorder.m */; };
-		4768F0F81B4D205C000CA947 /* FLCircularProgressView.m in Sources */ = {isa = PBXBuildFile; fileRef = 4768F0F71B4D205C000CA947 /* FLCircularProgressView.m */; };
-		4768F0FA1B4D20A8000CA947 /* FLCircularProgressView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 4768F0F91B4D20A8000CA947 /* FLCircularProgressView.xib */; };
+		4768F0F81B4D205C000CA947 /* FLAbstractCircularProgressBar.m in Sources */ = {isa = PBXBuildFile; fileRef = 4768F0F71B4D205C000CA947 /* FLAbstractCircularProgressBar.m */; };
 		47BA76E11B4C494A00238759 /* FLFilterVideoPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BA76E01B4C494A00238759 /* FLFilterVideoPlayer.m */; };
 		47BA76E41B4C496300238759 /* FLFilterFactory.m in Sources */ = {isa = PBXBuildFile; fileRef = 47BA76E31B4C496300238759 /* FLFilterFactory.m */; };
 		47BA76E61B4C49CA00238759 /* CoreImage.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 47BA76E51B4C49CA00238759 /* CoreImage.framework */; };
@@ -56,6 +56,8 @@
 		10758D961B4785F800196986 /* FLPreviewView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLPreviewView.m; path = RecorderLibrary/FLPreviewView.m; sourceTree = "<group>"; };
 		10758D9B1B47AECA00196986 /* FLCaptureSession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLCaptureSession.h; path = RecorderLibrary/FLCaptureSession.h; sourceTree = "<group>"; };
 		10758D9C1B47AECA00196986 /* FLCaptureSession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = FLCaptureSession.m; path = RecorderLibrary/FLCaptureSession.m; sourceTree = "<group>"; };
+		474A25671B4E547A0030E3B2 /* FLTimedCircularProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLTimedCircularProgressBar.h; sourceTree = "<group>"; };
+		474A25681B4E547A0030E3B2 /* FLTimedCircularProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLTimedCircularProgressBar.m; sourceTree = "<group>"; };
 		4751DE451B47B833000DC867 /* FLAbstractRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAbstractRecorder.h; sourceTree = "<group>"; };
 		4751DE461B47B833000DC867 /* FLAbstractRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAbstractRecorder.m; sourceTree = "<group>"; };
 		4751DE481B47CF15000DC867 /* FLRecordingController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = FLRecordingController.h; path = RecorderLibrary/FLRecordingController.h; sourceTree = "<group>"; };
@@ -63,9 +65,8 @@
 		4751DE4A1B47CF15000DC867 /* FLRecordingController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; name = FLRecordingController.xib; path = RecorderLibrary/FLRecordingController.xib; sourceTree = "<group>"; };
 		475C0E951B4A94FC008D98DB /* FLRecorder.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLRecorder.h; sourceTree = "<group>"; };
 		475C0E961B4A94FC008D98DB /* FLRecorder.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLRecorder.m; sourceTree = "<group>"; };
-		4768F0F61B4D205C000CA947 /* FLCircularProgressView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLCircularProgressView.h; sourceTree = "<group>"; };
-		4768F0F71B4D205C000CA947 /* FLCircularProgressView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLCircularProgressView.m; sourceTree = "<group>"; };
-		4768F0F91B4D20A8000CA947 /* FLCircularProgressView.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = FLCircularProgressView.xib; sourceTree = "<group>"; };
+		4768F0F61B4D205C000CA947 /* FLAbstractCircularProgressBar.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLAbstractCircularProgressBar.h; sourceTree = "<group>"; };
+		4768F0F71B4D205C000CA947 /* FLAbstractCircularProgressBar.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLAbstractCircularProgressBar.m; sourceTree = "<group>"; };
 		47BA76DF1B4C494A00238759 /* FLFilterVideoPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLFilterVideoPlayer.h; sourceTree = "<group>"; };
 		47BA76E01B4C494A00238759 /* FLFilterVideoPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FLFilterVideoPlayer.m; sourceTree = "<group>"; };
 		47BA76E21B4C496300238759 /* FLFilterFactory.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FLFilterFactory.h; sourceTree = "<group>"; };
@@ -219,9 +220,10 @@
 		4768F0F51B4D1E74000CA947 /* FLSegmentProgressView */ = {
 			isa = PBXGroup;
 			children = (
-				4768F0F61B4D205C000CA947 /* FLCircularProgressView.h */,
-				4768F0F71B4D205C000CA947 /* FLCircularProgressView.m */,
-				4768F0F91B4D20A8000CA947 /* FLCircularProgressView.xib */,
+				4768F0F61B4D205C000CA947 /* FLAbstractCircularProgressBar.h */,
+				4768F0F71B4D205C000CA947 /* FLAbstractCircularProgressBar.m */,
+				474A25671B4E547A0030E3B2 /* FLTimedCircularProgressBar.h */,
+				474A25681B4E547A0030E3B2 /* FLTimedCircularProgressBar.m */,
 			);
 			name = FLSegmentProgressView;
 			sourceTree = "<group>";
@@ -321,7 +323,6 @@
 				47BA76EF1B4C5E3700238759 /* video.mp4 in Resources */,
 				47BA76ED1B4C5B1C00238759 /* FLVideoPlayController.xib in Resources */,
 				10758D751B46DB9A00196986 /* Main.storyboard in Resources */,
-				4768F0FA1B4D20A8000CA947 /* FLCircularProgressView.xib in Resources */,
 				4751DE4C1B47CF15000DC867 /* FLRecordingController.xib in Resources */,
 				10758D7A1B46DB9A00196986 /* LaunchScreen.xib in Resources */,
 				10758D771B46DB9A00196986 /* Images.xcassets in Resources */,
@@ -342,7 +343,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				4768F0F81B4D205C000CA947 /* FLCircularProgressView.m in Sources */,
+				4768F0F81B4D205C000CA947 /* FLAbstractCircularProgressBar.m in Sources */,
 				4751DE4B1B47CF15000DC867 /* FLRecordingController.m in Sources */,
 				47BA76E11B4C494A00238759 /* FLFilterVideoPlayer.m in Sources */,
 				10758D971B4785F800196986 /* FLPreviewView.m in Sources */,
@@ -352,6 +353,7 @@
 				10758D9D1B47AECA00196986 /* FLCaptureSession.m in Sources */,
 				4751DE471B47B833000DC867 /* FLAbstractRecorder.m in Sources */,
 				475C0E971B4A94FC008D98DB /* FLRecorder.m in Sources */,
+				474A25691B4E547A0030E3B2 /* FLTimedCircularProgressBar.m in Sources */,
 				47BA76EC1B4C5B1C00238759 /* FLVideoPlayController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
