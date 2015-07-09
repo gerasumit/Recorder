@@ -194,11 +194,16 @@ static void *PlayerStatusContext= &PlayerStatusContext;
                             @"inputIntensity", @0.8, nil];
         
         CIImage *outputImage = [filter outputImage];
-        
         // You should apply filters here.
+        
+        
+        // Render
         [_videoPreviewView bindDrawable];
         [_ciContext drawImage:outputImage inRect:_videoPreviewViewBounds fromRect:CGRectMake(0, 0, CVPixelBufferGetWidth(pixelBuffer), CVPixelBufferGetHeight(pixelBuffer))];
         [_videoPreviewView display];
+        
+        // This should be done even under ARC.
+        CVPixelBufferRelease(pixelBuffer);
     }
 }
 

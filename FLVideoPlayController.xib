@@ -7,6 +7,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="FLVideoPlayController">
             <connections>
+                <outlet property="cView" destination="i4x-6c-3a5" id="dTn-NC-ycn"/>
                 <outlet property="playButton" destination="RgC-2s-4ar" id="Gxa-e4-aD2"/>
                 <outlet property="stopButton" destination="U8V-ne-j8H" id="avW-3g-bqG"/>
                 <outlet property="timeLabel" destination="GAl-X6-31j" id="rJx-hK-jYk"/>
@@ -47,18 +48,28 @@
                         <constraint firstAttribute="width" constant="109" id="189-rq-4R2"/>
                     </constraints>
                     <fontDescription key="fontDescription" type="system" pointSize="17"/>
-                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                     <nil key="highlightedColor"/>
                 </label>
+                <view contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="i4x-6c-3a5" customClass="FLCircularProgressView">
+                    <rect key="frame" x="250" y="454" width="100" height="100"/>
+                    <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                    <constraints>
+                        <constraint firstAttribute="width" constant="100" id="AFi-9s-sPG"/>
+                        <constraint firstAttribute="height" constant="100" id="Fj8-R4-d7d"/>
+                    </constraints>
+                </view>
             </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
             <constraints>
                 <constraint firstAttribute="bottom" secondItem="U8V-ne-j8H" secondAttribute="bottom" constant="8" id="1ei-UD-6dv"/>
                 <constraint firstItem="U8V-ne-j8H" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" constant="8" id="23V-xd-SSL"/>
                 <constraint firstAttribute="bottom" secondItem="RgC-2s-4ar" secondAttribute="bottom" constant="8" id="7Hc-wM-Tzb"/>
+                <constraint firstAttribute="centerX" secondItem="i4x-6c-3a5" secondAttribute="centerX" id="Biz-El-8lM"/>
                 <constraint firstAttribute="trailing" secondItem="GAl-X6-31j" secondAttribute="trailing" constant="8" id="JX2-7v-15D"/>
                 <constraint firstAttribute="bottom" secondItem="GAl-X6-31j" secondAttribute="bottom" constant="8" id="ip3-TO-mlR"/>
                 <constraint firstAttribute="centerX" secondItem="RgC-2s-4ar" secondAttribute="centerX" constant="-0.5" id="n2I-Hv-ziR"/>
+                <constraint firstItem="RgC-2s-4ar" firstAttribute="top" secondItem="i4x-6c-3a5" secondAttribute="bottom" constant="8" id="nZp-yY-WsT"/>
             </constraints>
         </view>
     </objects>

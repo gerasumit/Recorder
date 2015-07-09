@@ -23,7 +23,6 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     self.filterVideoPlayer = [[FLFilterVideoPlayer alloc] init];
-
 }
 
 -(void)viewDidAppear:(BOOL)animated{

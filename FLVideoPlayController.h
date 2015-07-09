@@ -7,12 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "FLCircularProgressView.h"
 
 @interface FLVideoPlayController : UIViewController
 
 @property (nonatomic, strong) IBOutlet UILabel *timeLabel;
 @property (nonatomic, strong) IBOutlet UIButton *playButton;
 @property (nonatomic, strong) IBOutlet UIButton *stopButton;
+
+@property (nonatomic, strong) IBOutlet UIView *cView;
 
 -(IBAction)togglePlay:(id)sender;
 

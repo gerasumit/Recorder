@@ -13,28 +13,28 @@
 @protocol FLFilterVideoPlayerDelegate <NSObject>
 
 @required
--(void)playerStatusChanged:(BOOL)readyToPlay;
+- (void)playerStatusChanged:(BOOL)readyToPlay;
 
 @optional
--(void)onTimeUpdate:(CMTime)cmTime;
+- (void)onTimeUpdate:(CMTime)cmTime;
 
 @end
 
 @interface FLFilterVideoPlayer : NSObject
-@property (nonatomic, weak) id<FLFilterVideoPlayerDelegate> delegate;
+@property (nonatomic, weak) id <FLFilterVideoPlayerDelegate> delegate;
 
 - (void)config;
--(GLKView*)setEAGLContext:(CGRect)rect;
--(void)setCIContext;
+- (GLKView *)setEAGLContext:(CGRect)rect;
+- (void)setCIContext;
 
 - (void)addTimeObserverToPlayer;
 - (void)removeTimeObserverFromPlayer;
--(void)loadVideoFromUrl:(NSURL *)videoUrl completionBlock:(void (^)(void))completionBlock error:(void (^)(NSError *error))errorBlock;
+- (void)loadVideoFromUrl:(NSURL *)videoUrl completionBlock:(void (^)(void))completionBlock error:(void (^)(NSError *error))errorBlock;
 
 
 
--(void) play;
--(void) pause;
--(void) stop;
+- (void)play;
+- (void)pause;
+- (void)stop;
 
 @end
