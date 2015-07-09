@@ -8,6 +8,7 @@
 
 #import "FLRecordingController.h"
 #import "FLRecorder.h"
+#import "FLAssetExportSession.h"
 
 @interface FLRecordingController ()<FLCircularProgressBarDelegate>
 {
@@ -34,6 +35,8 @@
     self.recorderLib  = [[FLRecorder alloc] init];
     [self.recorderLib setDelegate:self];
     [self.recorderLib configWithPreviewView:self.previewView completionBlock:nil error:nil];
+    
+    self.playButton.layer.cornerRadius = self.playButton.frame.size.width/2;
     
     [self.playButton setHidden:NO];
     [self.deleteButton setHidden:YES];
@@ -112,7 +115,6 @@
     }
 }
 
-
 -(void) recordingStarted{
     [self.deleteButton setHidden:YES];
     [self.saveButton setHidden:YES];
@@ -164,7 +166,8 @@
 
 
 #pragma mark-  Alert Box methods
-- (void)assetExportCompleted{
+
+- (void)assetExportCompleted:(NSURL *)assetURL{
     UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:@"Success"
                                           message:@"Video saved successfuly."

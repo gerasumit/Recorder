@@ -9,6 +9,8 @@
 #import "FLVideoPlayController.h"
 #import "FLFilterVideoPlayer.h"
 #import <GLKit/GLKit.h>
+#import "FLAssetExportSession.h"
+#import <AssetsLibrary/AssetsLibrary.h>
 
 @interface FLVideoPlayController ()<FLFilterVideoPlayerDelegate>
 
@@ -55,6 +57,29 @@
 
 -(void)onTimeUpdate:(CMTime)cmTime{
     
+}
+
+- (void) exportVideoAsset: (AVAsset *) videoAsset filterArray: (NSArray *) filterArray outputURL: (NSURL *) outputURL outputFileType: (NSString *) outputFileType andAssetExportSessionPreset: (NSString *) assetExportSessionPreset {
+    
+    // videoAsset: Expected AVAsset with video and audio Tracks
+    // filterArray: NSArray with CIFilters to be applied in cascaded fashion
+    // outputURL: Required filePath of the exported video
+    // outputFileType: Required fileType
+    // assetExportSessionPreset: Required session preset at which video is to be exported
+    
+    FLAssetExportSession * assetExportSession = [[FLAssetExportSession alloc] initWithAsset:videoAsset presetName:assetExportSessionPreset];
+    
+    assetExportSession.filterArray = filterArray;
+    assetExportSession.outputFileType = outputFileType;
+    assetExportSession.outputURL = outputURL;
+    [assetExportSession exportAsynchronouslyWithCompletionHandler: ^{
+        
+        if (assetExportSession.error == nil) {
+            NSLog(@"Video exported successfully! URL : %@", assetExportSession.outputURL);
+        } else {
+            NSLog(@"Something bad happened");
+        }
+    }];
 }
 
 @end
