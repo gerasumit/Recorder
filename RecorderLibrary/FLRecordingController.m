@@ -9,10 +9,20 @@
 #import "FLRecordingController.h"
 #import "FLRecorder.h"
 
-@interface FLRecordingController ()
+@interface FLRecordingController ()<FLCircularProgressBarDelegate>
+{
+    NSTimer *tickTickTimer;
+    NSDate *tickTickTimerPauseStart, *tickTickTimerPreviousFireDate;
+    
+    //NSTimer *nintySecTimer;
+    //NSDate *nintySecTimerPauseStart, *nintySecTimerPreviousFireDate;
+    
+    float progress;
+    
+    float time;
+}
 
 @property (nonatomic, strong) FLAbstractRecorder *recorderLib;
-
 
 @end
 
@@ -24,6 +34,15 @@
     self.recorderLib  = [[FLRecorder alloc] init];
     [self.recorderLib setDelegate:self];
     [self.recorderLib configWithPreviewView:self.previewView completionBlock:nil error:nil];
+    
+    [self.playButton setHidden:NO];
+    [self.deleteButton setHidden:YES];
+    [self.saveButton setHidden:YES];
+    
+    self.circularBar.delegate  = self;
+    
+    time =0.0;
+    
 }
 
 -(void)viewWillAppear:(BOOL)animated{
@@ -50,29 +69,101 @@
     [self.recorderLib completeRecordingWithAsset:nil];
 }
 
+-(IBAction)deleteButtonPressed:(id)sender{
+    // TODO: Implement me.
+}
+
+-(void)timerTick{
+    
+    time += 0.1;
+    progress+=(1.0/9);
+    NSLog(@"Tick %f", time);
+
+    [self.circularBar setProgress:progress];
+    [self.circularBar setNeedsDisplay];
+    
+    
+}
+
+-(void)progressMaxedOut{
+    [tickTickTimer invalidate];
+    [self.recorderLib toggleMovieRecording];
+    [self.recorderLib completeRecordingWithAsset:nil];
+}
+
+
 #pragma -mark Delegate Callbacks
 - (void)recordingContextChanged:(BOOL)isRecording{
     if(isRecording){
         [self.playButton setTitle:@"Pause" forState:UIControlStateNormal];
-        [self.saveButton setHidden:YES];
     }
     else{
         [self.playButton setTitle:@"Play" forState:UIControlStateNormal];
-        [self.saveButton setHidden:NO];
     }
 }
 
 -(void)sessionRunningAndDeviceAuthorizedContextChanged:(BOOL)isRunning{
     if(isRunning){
         [self.playButton setHidden:NO];
-        [self.saveButton setHidden:NO];
-    }
-    else{
+    }else{
         [self.playButton setHidden:YES];
+        [self.deleteButton setHidden:YES];
         [self.saveButton setHidden:YES];
     }
 }
 
+
+-(void) recordingStarted{
+    [self.deleteButton setHidden:YES];
+    [self.saveButton setHidden:YES];
+    
+    time=0.0;
+    progress =0.0;
+    
+    // Start the timers.
+    tickTickTimer = [NSTimer scheduledTimerWithTimeInterval:0.1 target:self selector:@selector(timerTick) userInfo:nil repeats:YES];
+
+
+}
+
+-(void) recordingResumed{
+    [self.deleteButton setHidden:YES];
+    [self.saveButton setHidden:YES];
+    self.circularBar.drawMode = PROGRESS;
+    [self.circularBar setNeedsDisplay];
+    
+    // Resume the timer.
+    float pauseTime1 = -1*[tickTickTimerPauseStart timeIntervalSinceNow];
+    [tickTickTimer setFireDate:[NSDate dateWithTimeInterval:pauseTime1 sinceDate:tickTickTimerPreviousFireDate]];
+
+}
+
+-(void) recordingPaused{
+    [self.deleteButton setHidden:NO];
+    [self.saveButton setHidden:NO];
+    self.circularBar.drawMode = SEGMENTS;
+    [self.circularBar setNeedsDisplay];
+    
+    // Pause the timer;
+    tickTickTimerPauseStart = [NSDate dateWithTimeIntervalSinceNow:0];
+    tickTickTimerPreviousFireDate = [tickTickTimer fireDate];
+    [tickTickTimer setFireDate:[NSDate distantFuture]];
+
+}
+
+-(void) recordingEnded{
+    [self.playButton setHidden:NO];
+    [self.deleteButton setHidden:YES];
+    [self.saveButton setHidden:YES];
+}
+
+- (void) segmentCreated{
+    [self.circularBar markSegment];
+}
+
+
+
+#pragma mark-  Alert Box methods
 - (void)assetExportCompleted{
     UIAlertController *alertController = [UIAlertController
                                           alertControllerWithTitle:@"Success"

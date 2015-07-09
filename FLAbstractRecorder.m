@@ -128,7 +128,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 	});
 }
 
-
 #pragma -mark Recording
 
 - (void)toggleMovieRecording {
@@ -154,20 +153,43 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 		    NSString *outputFilePath = [NSTemporaryDirectory() stringByAppendingPathComponent:[[NSString stringWithFormat:@"movieseg%lu", (unsigned long)segmentIndex] stringByAppendingPathExtension:@"mov"]];
 
 		    [[self movieFileOutput] startRecordingToOutputFileURL:[NSURL fileURLWithPath:outputFilePath] recordingDelegate:self];
+
+		    dispatch_async(dispatch_get_main_queue(), ^{
+				if (segmentIndex == 0) {
+				    // Movie recording has just started.
+				    if ([self.delegate respondsToSelector:@selector(recordingStarted)]) {
+				        [self.delegate recordingStarted];
+					}
+				}
+				else {
+				    if ([self.delegate respondsToSelector:@selector(recordingResumed)]) {
+				        [self.delegate recordingResumed];
+					}
+				}
+			});
 		}
 		else {
 		    [[self movieFileOutput] stopRecording];
+		    dispatch_async(dispatch_get_main_queue(), ^{
+				if ([self.delegate respondsToSelector:@selector(recordingPaused)]) {
+				    [self.delegate recordingPaused];
+				}
+			});
 		    [self.flCaptureSession addSegmentWithURL:[self movieFileOutput].outputFileURL];
+		    dispatch_async(dispatch_get_main_queue(), ^{
+				if ([self.delegate respondsToSelector:@selector(segmentCreated)]) {
+				    [self.delegate segmentCreated];
+				}
+			});
 		}
 	});
 }
 
 - (void)completeRecordingWithAsset:(AVAsset *)asset {
-    dispatch_async(self.sessionQueue, ^{
-        [self.flCaptureSession getCompleteVideoWithAudioAsset:asset];
-    });
+	dispatch_async(self.sessionQueue, ^{
+		[self.flCaptureSession getCompleteVideoWithAudioAsset:asset];
+	});
 }
-
 
 #pragma -mark Utilities
 
@@ -414,7 +436,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 	[[self flCaptureSession] commitConfiguration];
 }
 
-
 #pragma -mark Observers for KVO
 
 - (void)observeValueForKeyPath:(NSString *)keyPath ofObject:(id)object change:(NSDictionary *)change context:(void *)context {
@@ -441,7 +462,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 	}
 }
 
-
 #pragma -mark Delegate Callbacks
 
 - (void)captureOutput:(AVCaptureFileOutput *)captureOutput didStartRecordingToOutputFileAtURL:(NSURL *)fileURL fromConnections:(NSArray *)connections {
@@ -453,7 +473,6 @@ static void *SessionRunningAndDeviceAuthorizedContext = &SessionRunningAndDevice
 
 	[self setLockInterfaceRotation:NO];
 }
-
 
 #pragma -mark Helpers
 

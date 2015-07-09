@@ -31,6 +31,12 @@
  */
 - (void)sessionRunningAndDeviceAuthorizedContextChanged:(BOOL)isRunning;
 
+- (void) recordingStarted;
+- (void) recordingPaused;
+- (void) recordingResumed;
+- (void) recordingEnded;
+- (void) segmentCreated;
+
 
 @end
 
